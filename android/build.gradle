@@ -1,3 +1,35 @@
+// allprojects {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+// }
+
+// // plugins {
+
+// //     id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+// //     id "com.android.application" version "7.3.0" apply false
+// //     //id "org.jetbrains.kotlin.android" version "1.7.10" apply false **//Replaced this**
+// //     id "org.jetbrains.kotlin.android" version "1.9.22" apply false **// With This**
+
+// //   // Add the dependency for the Google services Gradle plugin
+// // //   id("com.google.gms.google-services") version "4.4.2" apply false
+// // }
+
+
+// rootProject.buildDir = "../build"
+// subprojects {
+//     project.buildDir = "${rootProject.buildDir}/${project.name}"
+// }
+// subprojects {
+//     project.evaluationDependsOn(":app")
+// }
+
+// tasks.register("clean", Delete) {
+//     delete rootProject.buildDir
+// }
+
+
 allprojects {
     repositories {
         google()
@@ -5,12 +37,12 @@ allprojects {
     }
 }
 
-rootProject.buildDir = "../build"
+rootProject.buildDir = '../build'
 subprojects {
     project.buildDir = "${rootProject.buildDir}/${project.name}"
 }
 subprojects {
-    project.evaluationDependsOn(":app")
+    project.evaluationDependsOn(':app')
 }
 
 tasks.register("clean", Delete) {
