@@ -58,6 +58,7 @@ class _FirstScreenState extends State<FirstScreen> {
             ),
             for (int i = 0; i < titles.length; i++)
               ListTile(
+                tileColor: i == index ? Colors.blue.shade100 : null,
                 title: Text(titles[i]),
                 onTap: () {
                   setState(() {
@@ -66,33 +67,6 @@ class _FirstScreenState extends State<FirstScreen> {
                   Navigator.pop(context);
                 },
               ),
-            // ListTile(
-            //   title: const Text('Home'),
-            //   onTap: () {
-            //     setState(() {
-            //       index = 0;
-            //     });
-            //     Navigator.pop(context);
-            //   },
-            // ),
-            // ListTile(
-            //   title: const Text('Edit Emergency Number'),
-            //   onTap: () {
-            //     setState(() {
-            //       index = 1;
-            //     });
-            //     Navigator.pop(context);
-            //   },
-            // ),
-            // ListTile(
-            //   title: const Text('Temp'),
-            //   onTap: () {
-            //     setState(() {
-            //       index = 2;
-            //     });
-            //     Navigator.pop(context);
-            //   },
-            // ),
           ],
         ),
       ),

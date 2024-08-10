@@ -122,31 +122,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        // height: 100,
-        color: Colors.transparent,
-
-        padding: const EdgeInsets.all(16.0),
-
-        child: BottomAppBar(
-          child: ToggleSwitch(
-            initialLabelIndex: isHelping ? 0 : 1,
-            minWidth: 100.0,
-            cornerRadius: 20.0,
-            activeBgColor: const [Colors.blue],
-            borderWidth: 2.0,
-            customWidths: const [200.0, 200.0],
-            activeFgColor: Colors.white,
-            inactiveBgColor: Colors.grey,
-            inactiveFgColor: Colors.white,
-            fontSize: 16,
-            labels: filters,
-            onToggle: (index) {
-              setState(() {
-                isHelping = index == 0;
-              });
-            },
-          ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: ToggleSwitch(
+          initialLabelIndex: isHelping ? 0 : 1,
+          minWidth: 100.0,
+          cornerRadius: 20.0,
+          activeBgColor: const [Colors.blue],
+          borderWidth: 2.0,
+          minHeight: 55,
+          customWidths: const [200.0, 200.0],
+          activeFgColor: Colors.white,
+          inactiveBgColor: Colors.grey,
+          inactiveFgColor: Colors.white,
+          fontSize: 16,
+          labels: filters,
+          onToggle: (index) {
+            setState(() {
+              isHelping = index == 0;
+            });
+          },
         ),
       ),
       body: Stack(

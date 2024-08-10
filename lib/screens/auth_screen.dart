@@ -1,5 +1,7 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:disaster_ready/screens/first_screen.dart';
 // import 'package:disaster_ready/screens/first_screen.dart';
@@ -102,11 +104,18 @@ class _AuthScreenState extends State<AuthScreen> {
       // });
     } on Exception catch (e) {
       print(e);
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) => const FirstScreen(),
-        ),
-      );
+      Future.delayed(const Duration(milliseconds: 400), () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+            builder: (context) => const FirstScreen(),
+          ),
+        );
+        snack('Signed=in successfully', context, color: Colors.green);
+        setState(() {
+          authing = false;
+        });
+      });
+
       // snack('Authentication failed', context);
       setState(() {
         authing = false;
