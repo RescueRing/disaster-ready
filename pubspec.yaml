@@ -51,6 +51,13 @@ dependencies:
   permission_handler: ^11.3.1
   contacts_service: ^0.6.3
   flex_color_scheme: ^7.3.1
+  google_maps: ^8.0.0
+  google_maps_flutter: ^2.9.0
+  flutter_config: ^2.0.2
+  font_awesome_flutter: ^10.7.0
+  internet_connection_checker: ^1.0.0+1
+  geolocator: ^12.0.0
+  telephony: ^0.2.0
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +87,12 @@ flutter:
   - assets/images/bg2.jpeg
   - assets/images/google_icon.png
   - assets/images/background.png
+  - assets/
+  - assets/icon/
+  # - assets/background/
+  - assets/maps/
+  # - assets/maps/markers/
+  # - assets/weatherData.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

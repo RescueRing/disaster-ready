@@ -70,3 +70,4 @@ lib/firebase_options.dart
 /android/app/release
 .metadata
 .env
+lib/screens/temp_home.dart

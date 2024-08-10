@@ -41,9 +41,9 @@ class _AddEmergencyNumberState extends State<AddEmergencyNumber> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Emergency Number'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Add Emergency Number'),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
