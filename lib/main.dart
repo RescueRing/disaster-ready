@@ -1,11 +1,13 @@
 import 'dart:math';
 
+import 'package:disaster_ready/screens/add_emergency_number.dart';
 import 'package:disaster_ready/screens/auth_screen.dart';
 import 'package:disaster_ready/screens/first_screen.dart';
 import 'package:disaster_ready/widgets/fetch_permissions.dart';
 import 'package:disaster_ready/widgets/phone_number.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -69,9 +71,34 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Disaster Ready',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        textTheme: GoogleFonts.exo2TextTheme(),
+      // theme: ThemeData(
+      //   primarySwatch: Colors.blue,
+      //   textTheme: GoogleFonts.exo2TextTheme(),
+      // ),
+      theme: FlexThemeData.light(
+        colors: const FlexSchemeColor(
+          primary: Color(0xff004881),
+          primaryContainer: Color(0xffd0e4ff),
+          secondary: Color(0xffac3306),
+          secondaryContainer: Color(0xffffdbcf),
+          tertiary: Color(0xff006875),
+          tertiaryContainer: Color(0xff95f0ff),
+          appBarColor: Color(0xffffdbcf),
+          error: Color(0xffb00020),
+        ),
+        surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
+        blendLevel: 7,
+        subThemesData: const FlexSubThemesData(
+          blendOnLevel: 10,
+          blendOnColors: false,
+          useTextTheme: true,
+          useM2StyleDividerInM3: true,
+          alignedDropdown: true,
+          useInputDecoratorThemeInDialogs: true,
+        ),
+        visualDensity: FlexColorScheme.comfortablePlatformDensity,
+        useMaterial3: true,
+        swapLegacyOnMaterial3: true,
       ),
       darkTheme: ThemeData(
         primarySwatch: Colors.blue,
