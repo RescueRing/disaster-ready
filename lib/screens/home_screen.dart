@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late CameraPosition? currentPosition;
+
+  bool isHelping = false;
+  List<String> filters = ['Helping', 'Need Help'];
 
   bool locationLoaded = false;
   late LatLng? currentLocation;
@@ -100,6 +104,31 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        // height: 100,
+        color: Colors.transparent,
+
+        padding: const EdgeInsets.all(16.0),
+
+        child: BottomAppBar(
+            child: ToggleSwitch(
+          initialLabelIndex: isHelping ? 0 : 1,
+          minWidth: 100.0,
+          cornerRadius: 20.0,
+          activeBgColor: const [Colors.blue],
+          borderWidth: 2.0,
+          customWidths: const [200.0, 200.0],
+          activeFgColor: Colors.white,
+          inactiveBgColor: Colors.grey,
+          inactiveFgColor: Colors.white,
+          fontSize: 16,
+          labels: filters,
+          onToggle: (index) {
+            print('switched to: $index');
+          },
+        )),
+      ),
       body: Stack(
         children: [
           locationLoaded
