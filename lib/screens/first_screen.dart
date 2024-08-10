@@ -1,3 +1,4 @@
+import 'package:disaster_ready/screens/add_emergency_number.dart';
 import 'package:disaster_ready/screens/home_screen.dart';
 import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,19 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  List<Widget> screens = [const HomeScreen()];
-  int index = 0;
+  List<Widget> screens = [const HomeScreen(), const AddEmergencyNumber()];
+  int index = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+        width: 300,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topRight: Radius.circular(20),
+            bottomRight: Radius.circular(20),
+          ),
+        ),
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
@@ -36,7 +44,7 @@ class _FirstScreenState extends State<FirstScreen> {
               },
             ),
             ListTile(
-              title: const Text('Settings'),
+              title: const Text('Edit Emergency Number'),
               onTap: () {
                 setState(() {
                   index = 1;
