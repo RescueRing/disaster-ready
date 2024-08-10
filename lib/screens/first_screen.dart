@@ -1,5 +1,7 @@
 import 'package:disaster_ready/screens/add_emergency_number.dart';
+import 'package:disaster_ready/screens/disaster_screen.dart';
 import 'package:disaster_ready/screens/home_screen.dart';
+import 'package:disaster_ready/screens/schemes_screen.dart';
 import 'package:disaster_ready/screens/temp_home.dart';
 import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +18,18 @@ class _FirstScreenState extends State<FirstScreen> {
   List<Widget> screens = [
     HomeScreen(),
     const AddEmergencyNumber(),
-    TempScreen()
+    TempScreen(),
+    SchemesScreen(),
+    DisasterScreen(),
   ];
-  List<String> titles = ['Home', 'Edit Emergency Number', 'Temp'];
-  int index = 0;
+  List<String> titles = [
+    'Home',
+    'Edit Emergency Number',
+    'Temp',
+    'Government Schemes',
+    'Disaster Guide'
+  ];
+  int index = 4;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,39 +44,55 @@ class _FirstScreenState extends State<FirstScreen> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.blue.shade900,
               ),
-              child: Text('Drawer Header'),
+              child: Text(
+                'Drawer Header',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
+                ),
+              ),
             ),
-            ListTile(
-              title: const Text('Home'),
-              onTap: () {
-                setState(() {
-                  index = 0;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Edit Emergency Number'),
-              onTap: () {
-                setState(() {
-                  index = 1;
-                });
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: const Text('Temp'),
-              onTap: () {
-                setState(() {
-                  index = 2;
-                });
-                Navigator.pop(context);
-              },
-            ),
+            for (int i = 0; i < titles.length; i++)
+              ListTile(
+                title: Text(titles[i]),
+                onTap: () {
+                  setState(() {
+                    index = i;
+                  });
+                  Navigator.pop(context);
+                },
+              ),
+            // ListTile(
+            //   title: const Text('Home'),
+            //   onTap: () {
+            //     setState(() {
+            //       index = 0;
+            //     });
+            //     Navigator.pop(context);
+            //   },
+            // ),
+            // ListTile(
+            //   title: const Text('Edit Emergency Number'),
+            //   onTap: () {
+            //     setState(() {
+            //       index = 1;
+            //     });
+            //     Navigator.pop(context);
+            //   },
+            // ),
+            // ListTile(
+            //   title: const Text('Temp'),
+            //   onTap: () {
+            //     setState(() {
+            //       index = 2;
+            //     });
+            //     Navigator.pop(context);
+            //   },
+            // ),
           ],
         ),
       ),
