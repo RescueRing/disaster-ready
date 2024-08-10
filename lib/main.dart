@@ -1,9 +1,10 @@
-import 'dart:math';
+// import 'dart:math';
 
-import 'package:disaster_ready/screens/add_emergency_number.dart';
+// import 'package:disaster_ready/screens/add_emergency_number.dart';
 import 'package:disaster_ready/screens/auth_screen.dart';
 import 'package:disaster_ready/screens/first_screen.dart';
-import 'package:disaster_ready/widgets/fetch_permissions.dart';
+import 'package:disaster_ready/screens/home_screen.dart';
+// import 'package:disaster_ready/widgets/fetch_permissions.dart';
 import 'package:disaster_ready/widgets/phone_number.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -99,6 +100,8 @@ class _MyAppState extends State<MyApp> {
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
+      ).copyWith(
+        textTheme: GoogleFonts.exo2TextTheme(),
       ),
       darkTheme: ThemeData(
         primarySwatch: Colors.blue,
@@ -120,10 +123,9 @@ class _MyAppState extends State<MyApp> {
           }
           if (widget.authed) {
             if (widget.phoneNumber == '' || !widget.permissionGiven) {
-              print(widget.phoneNumber);
-              print(widget.permissionGiven);
               return PhoneNumber();
             }
+            // return HomeScreen();
             return const FirstScreen();
           } else {
             return const AuthScreen();
