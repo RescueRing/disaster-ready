@@ -2,7 +2,6 @@
 
 import 'package:disaster_ready/widgets/select_contacts.dart';
 import 'package:flutter/material.dart';
-// import 'package:contacts_service/contacts_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AddEmergencyNumber extends StatefulWidget {
@@ -41,9 +40,6 @@ class _AddEmergencyNumberState extends State<AddEmergencyNumber> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Add Emergency Number'),
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -56,7 +52,7 @@ class _AddEmergencyNumberState extends State<AddEmergencyNumber> {
             GestureDetector(
               onTap: _selectContact,
               child: Card(
-                color: Theme.of(context).primaryColor.withOpacity(0.1),
+                color: Colors.blue.shade800,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide(
@@ -69,6 +65,8 @@ class _AddEmergencyNumberState extends State<AddEmergencyNumber> {
                       'Select Contact',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                        color: Colors.white,
                       ),
                       textAlign: TextAlign.center,
                     ),

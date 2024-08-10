@@ -1,8 +1,8 @@
-import 'package:disaster_ready/screens/add_emergency_number.dart';
-import 'package:disaster_ready/screens/disaster_screen.dart';
-import 'package:disaster_ready/screens/home_screen.dart';
-import 'package:disaster_ready/screens/schemes_screen.dart';
-import 'package:disaster_ready/screens/temp_home.dart';
+import 'package:disaster_ready/screens/main/add_emergency_number.dart';
+import 'package:disaster_ready/screens/main/disaster_screen.dart';
+import 'package:disaster_ready/screens/main/home_screen.dart';
+import 'package:disaster_ready/screens/main/schemes_screen.dart';
+import 'package:disaster_ready/screens/main/temp_home.dart';
 import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,7 +29,7 @@ class _FirstScreenState extends State<FirstScreen> {
     'Government Schemes',
     'Disaster Guide'
   ];
-  int index = 4;
+  int index = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
