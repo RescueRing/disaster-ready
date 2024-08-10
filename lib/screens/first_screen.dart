@@ -1,6 +1,7 @@
 import 'package:disaster_ready/screens/home_screen.dart';
 import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -10,7 +11,7 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
-  List<Widget> screens = [HomeScreen()];
+  List<Widget> screens = [const HomeScreen()];
   int index = 0;
   @override
   Widget build(BuildContext context) {
@@ -47,9 +48,21 @@ class _FirstScreenState extends State<FirstScreen> {
         ),
       ),
       appBar: AppBar(
-          // leading: const Icon(Icons.menu),
-          // title: const Text('Disaster Ready'),
-          ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed: () {
+              SharedPreferences.getInstance().then((prefs) {
+                prefs.clear();
+                snack(
+                  'Cleared all data',
+                  context,
+                );
+              });
+            },
+          )
+        ],
+      ),
       body: screens[index],
     );
   }

@@ -111,6 +111,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace "com.example.disaster_ready"
+    //
+    compileSdkVersion 34
     compileSdk flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
