@@ -3,6 +3,7 @@
 import 'dart:async';
 
 // import 'package:disaster_ready/util/snack.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -49,6 +50,10 @@ class _HomeScreenState extends State<HomeScreen> {
     getCurrentLocation();
   }
 
+  // void FireToMarker(){
+  //   FirebaseFirestore
+  // }
+
   Widget helpOrSeek(isHelping, currentLocation, selectedFilter) {
     return Positioned(
       right: 20.0,
@@ -59,6 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
         selectedFilter: selectedFilter,
       ),
     );
+  }
+
+  void sendToFire(location, isHelping, selectedFilter) {
+    FirebaseFirestore.instance.collection('main').doc('locations').update({
+      'location': FieldValue.arrayUnion([location]),
+      'helping': FieldValue.arrayUnion([isHelping]),
+      'selectedHS': FieldValue.arrayUnion([selectedFilter]),
+    });
   }
 
   Widget recenterButton(Completer<GoogleMapController> controllerCompleter,
@@ -410,7 +423,221 @@ class _HomeScreenState extends State<HomeScreen> {
           locationLoaded
               ? GoogleMap(
                   onTap: (argument) {
-                    print(argument);
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(25.0)),
+                      ),
+                      enableDrag: true,
+                      showDragHandle: true,
+                      context: context,
+                      builder: (BuildContext context) {
+                        return StatefulBuilder(
+                          builder:
+                              (BuildContext context, StateSetter setState) =>
+                                  Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Container(
+                              height: 470,
+
+                              // color: Colors.blue,
+                              child: Center(
+                                child: Column(
+                                  children: [
+                                    TextField(
+                                      style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                      ),
+                                      controller: TextEditingController(
+                                          text: isHelping
+                                              ? 'Helping'
+                                              : 'Seeking Help'),
+                                      decoration: InputDecoration(
+                                        prefixIconColor: Colors.red,
+                                        prefixIcon: Icon(
+                                          isHelping
+                                              ? FontAwesomeIcons
+                                                  .handHoldingHeart
+                                              : FontAwesomeIcons.handsHelping,
+                                          color: Colors.red.shade300,
+                                        ),
+                                      ),
+                                      enabled: false,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    if (isHelping)
+                                      Expanded(
+                                        child: ListView.builder(
+                                          itemCount: helpingOptions.length,
+                                          itemBuilder: (context, index) {
+                                            // if (index == helpingOptions.length) {
+                                            //   return SizedBox(
+                                            //     height: 30,
+                                            //   );
+                                            // }
+                                            return Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  side: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade300,
+                                                      width: 2)),
+                                              child: ListTile(
+                                                // style: ListTileStyle.drawer,
+                                                // dense: true,
+                                                tileColor: widget.selectedHS
+                                                        .contains(
+                                                            helpingOptions[
+                                                                index])
+                                                    ? Colors.blue.shade300
+                                                    : null,
+                                                onTap: () {
+                                                  if (widget.selectedHS
+                                                      .contains(helpingOptions[
+                                                          index])) {
+                                                    setState(() {
+                                                      widget.selectedHS.remove(
+                                                          helpingOptions[
+                                                              index]);
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      widget.selectedHS.add(
+                                                          helpingOptions[
+                                                              index]);
+                                                    });
+                                                  }
+                                                  setState(() {
+                                                    print(widget.selectedHS);
+                                                  });
+                                                },
+                                                leading: Icon(
+                                                  helpIcons[
+                                                      helpingOptions[index]],
+                                                  color: !widget.selectedHS
+                                                          .contains(
+                                                              helpingOptions[
+                                                                  index])
+                                                      ? Colors.blue
+                                                      : Colors.white,
+                                                ),
+                                                title: Text(
+                                                  helpingOptions[index],
+                                                  style: const TextStyle(
+                                                      fontSize: 18),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    if (!isHelping)
+                                      Expanded(
+                                        child: ListView.builder(
+                                          itemCount: helpingOptions.length,
+                                          itemBuilder: (context, index) {
+                                            // if (index == helpingOptions.length) {
+                                            //   return SizedBox(
+                                            //     height: 30,
+                                            //   );
+                                            // }
+                                            return Card(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                  side: BorderSide(
+                                                      color:
+                                                          Colors.blue.shade300,
+                                                      width: 2)),
+                                              child: ListTile(
+                                                // style: ListTileStyle.drawer,
+                                                // dense: true,
+                                                tileColor: widget.selectedHS
+                                                        .contains(
+                                                            helpingOptions[
+                                                                index])
+                                                    ? Colors.blue.shade300
+                                                    : null,
+                                                onTap: () {
+                                                  if (widget.selectedHS
+                                                      .contains(helpingOptions[
+                                                          index])) {
+                                                    setState(() {
+                                                      widget.selectedHS.remove(
+                                                          helpingOptions[
+                                                              index]);
+                                                    });
+                                                  } else {
+                                                    setState(() {
+                                                      widget.selectedHS.add(
+                                                          helpingOptions[
+                                                              index]);
+                                                    });
+                                                  }
+                                                  setState(() {
+                                                    print(widget.selectedHS);
+                                                  });
+                                                },
+                                                leading: Icon(
+                                                  helpIcons[
+                                                      helpingOptions[index]],
+                                                  color: !widget.selectedHS
+                                                          .contains(
+                                                              helpingOptions[
+                                                                  index])
+                                                      ? Colors.blue
+                                                      : Colors.white,
+                                                ),
+                                                title: Text(
+                                                  helpingOptions[index],
+                                                  style: const TextStyle(
+                                                      fontSize: 18),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    // Text('Filter: $selectedFilter'),
+                                    // SizedBox(
+                                    //   height: 20,
+                                    // ),
+                                    if (widget.selectedHS.isNotEmpty)
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.blue.shade100,
+                                          side: BorderSide(
+                                            color: Colors.blue.shade300,
+                                            width: 2,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          sendToFire(currentLocation, isHelping,
+                                              widget.selectedHS);
+                                          widget.selectedHS = [];
+                                          snack('Submitted successfully!',
+                                              context,
+                                              color: Colors.green);
+                                        },
+                                        child: Text('Submit'),
+                                      )
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                   myLocationEnabled: true,
                   myLocationButtonEnabled: false,

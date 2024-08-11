@@ -2,7 +2,6 @@ import 'package:disaster_ready/screens/main/add_emergency_number.dart';
 import 'package:disaster_ready/screens/main/disaster_screen.dart';
 import 'package:disaster_ready/screens/main/home_screen.dart';
 import 'package:disaster_ready/screens/main/schemes_screen.dart';
-import 'package:disaster_ready/screens/main/temp_home.dart';
 import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +21,7 @@ class _FirstScreenState extends State<FirstScreen> {
     DisasterScreen(),
   ];
   List<String> titles = [
-    'Home',
+    'Rescue Ring',
     'Edit Emergency Number',
     'Government Schemes',
     'Disaster Guide'
@@ -44,13 +43,47 @@ class _FirstScreenState extends State<FirstScreen> {
           children: [
             DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue.shade900,
+                color: Colors.blue.shade600,
               ),
-              child: Text(
-                'Drawer Header',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+              child: Expanded(
+                child: Stack(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Positioned(
+                      top: 5,
+                      left: 70,
+                      child: Text(
+                        'Rescue Ring',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 5,
+                      left: 10,
+                      child: Text(
+                        'A network of support for those in need',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      top: 16,
+                      right: 100,
+                      child: Container(
+                        child: Image.asset('assets/images/logo.png'),
+                        padding: const EdgeInsets.all(8),
+                        constraints: BoxConstraints(
+                          maxWidth: 100,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
