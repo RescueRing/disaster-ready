@@ -5,10 +5,12 @@ import 'dart:async';
 // import 'package:disaster_ready/util/snack.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disaster_ready/util/snack.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -43,16 +45,60 @@ class _HomeScreenState extends State<HomeScreen> {
   late LatLng? currentLocation = LatLng(0, 0);
   late GoogleMapController mapController;
   Completer<GoogleMapController> controllerCompleter = Completer();
+  List<Marker> markersList = [];
 
   @override
   void initState() {
     super.initState();
     getCurrentLocation();
+    FireToMarker();
+    print('Init state');
   }
 
-  // void FireToMarker(){
-  //   FirebaseFirestore
-  // }
+  void FireToMarker() async {
+    print('Fire to marker');
+    List<Marker> markers = [];
+    List<String> contacts = [];
+    List<Map<String, dynamic>> data = await FirebaseFirestore.instance
+        .collection('main')
+        .doc('locations')
+        .get()
+        .then((value) {
+      List<dynamic> rawData = value.data()!['location'];
+      return rawData.cast<Map<String, dynamic>>();
+    });
+
+    for (var i in data) {
+      markers.add(Marker(
+        markerId: MarkerId(i['phone']),
+        position:
+            LatLng(double.parse(i['latitude']), double.parse(i['longitude'])),
+        icon: BitmapDescriptor.defaultMarker,
+      ));
+      contacts.add(i['phone']);
+    }
+
+    print(data);
+    // print('Fire to marker');
+    // List<Marker> markers = [];
+    // List<String> contacts = [];
+    // List<Map<String, dynamic>> data = await FirebaseFirestore.instance
+    //     .collection('main')
+    //     .doc('locations')
+    //     .get()
+    //     .then((value) => value.data()!['location']);
+    // for (var i in data) {
+    //   markers.add(Marker(
+    //     markerId: MarkerId(i['phone']),
+    //     position:
+    //         LatLng(double.parse(i['latitude']), double.parse(i['longitude'])),
+    //     icon: BitmapDescriptor.defaultMarker,
+    //   ));
+    //   contacts.add(i['phone']);
+    // }
+
+    // print(data);
+  }
 
   Widget helpOrSeek(isHelping, currentLocation, selectedFilter) {
     return Positioned(
@@ -66,12 +112,21 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void sendToFire(location, isHelping, selectedFilter) {
+  void sendToFire(location, isHelping, selectedFilter) async {
+    var phone = await SharedPreferences.getInstance()
+        .then((value) => value.getString('phoneNumber'));
     FirebaseFirestore.instance.collection('main').doc('locations').update({
-      'location': FieldValue.arrayUnion([location]),
-      'helping': FieldValue.arrayUnion([isHelping]),
-      'selectedHS': FieldValue.arrayUnion([selectedFilter]),
+      'location': FieldValue.arrayUnion([
+        {
+          'latitude': location.latitude.toString(),
+          'longitude': location.longitude.toString(),
+          'isHelping': isHelping,
+          'selectedFilter': selectedFilter,
+          'phone': phone
+        }
+      ])
     });
+    // });
   }
 
   Widget recenterButton(Completer<GoogleMapController> controllerCompleter,
@@ -159,6 +214,7 @@ class _HomeScreenState extends State<HomeScreen> {
       currentPosition = CameraPosition(target: currentLocation!, zoom: 15.0);
       locationLoaded = true;
     });
+    FireToMarker();
   }
 
   Map<String, IconData> helpIcons = {
@@ -292,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           if (!isHelping)
                             Expanded(
                               child: ListView.builder(
-                                itemCount: helpingOptions.length,
+                                itemCount: seekingOptions.length,
                                 itemBuilder: (context, index) {
                                   // if (index == helpingOptions.length) {
                                   //   return SizedBox(
@@ -309,20 +365,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                       // style: ListTileStyle.drawer,
                                       // dense: true,
                                       tileColor: widget.selectedHS
-                                              .contains(helpingOptions[index])
+                                              .contains(seekingOptions[index])
                                           ? Colors.blue.shade300
                                           : null,
                                       onTap: () {
                                         if (widget.selectedHS
-                                            .contains(helpingOptions[index])) {
+                                            .contains(seekingOptions[index])) {
                                           setState(() {
                                             widget.selectedHS
-                                                .remove(helpingOptions[index]);
+                                                .remove(seekingOptions[index]);
                                           });
                                         } else {
                                           setState(() {
                                             widget.selectedHS
-                                                .add(helpingOptions[index]);
+                                                .add(seekingOptions[index]);
                                           });
                                         }
                                         setState(() {
@@ -330,14 +386,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                         });
                                       },
                                       leading: Icon(
-                                        helpIcons[helpingOptions[index]],
+                                        helpIcons[seekingOptions[index]],
                                         color: !widget.selectedHS
-                                                .contains(helpingOptions[index])
+                                                .contains(seekingOptions[index])
                                             ? Colors.blue
                                             : Colors.white,
                                       ),
                                       title: Text(
-                                        helpingOptions[index],
+                                        seekingOptions[index],
                                         style: const TextStyle(fontSize: 18),
                                       ),
                                     ),
@@ -362,6 +418,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                               ),
                               onPressed: () {
+                                print('Selected HS: ${widget.selectedHS}');
+                                markersList.add(Marker(
+                                  markerId: MarkerId('currentLocation'),
+                                  icon: BitmapDescriptor.defaultMarker,
+                                  position: currentLocation,
+                                ));
+                                sendToFire(currentLocation, isHelping,
+                                    widget.selectedHS);
+                                Navigator.pop(context);
                                 widget.selectedHS = [];
                                 snack('Submitted successfully!', context,
                                     color: Colors.green);
@@ -624,6 +689,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           sendToFire(currentLocation, isHelping,
                                               widget.selectedHS);
                                           widget.selectedHS = [];
+                                          Navigator.of(context).pop();
                                           snack('Submitted successfully!',
                                               context,
                                               color: Colors.green);
@@ -648,6 +714,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   onCameraMove: (position) => currentPosition = position,
                   zoomControlsEnabled: false,
                   markers: {
+                      Marker(
+                        markerId: MarkerId('currentLocation'),
+                        icon: BitmapDescriptor.defaultMarker,
+                        position: LatLng(13.0091, 77.530203),
+                      ),
                       Marker(
                         markerId: MarkerId('currentLocation'),
                         icon: BitmapDescriptor.defaultMarker,

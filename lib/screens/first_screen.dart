@@ -2,9 +2,9 @@ import 'package:disaster_ready/screens/main/add_emergency_number.dart';
 import 'package:disaster_ready/screens/main/disaster_screen.dart';
 import 'package:disaster_ready/screens/main/home_screen.dart';
 import 'package:disaster_ready/screens/main/schemes_screen.dart';
-import 'package:disaster_ready/util/snack.dart';
+// import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstScreen extends StatefulWidget {
   const FirstScreen({super.key});
@@ -104,20 +104,20 @@ class _FirstScreenState extends State<FirstScreen> {
       appBar: AppBar(
         title: Text(titles[index]),
         backgroundColor: Colors.transparent,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.delete),
-            onPressed: () {
-              SharedPreferences.getInstance().then((prefs) {
-                prefs.clear();
-                snack(
-                  'Cleared all data',
-                  context,
-                );
-              });
-            },
-          )
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.delete),
+        //     onPressed: () {
+        //       SharedPreferences.getInstance().then((prefs) {
+        //         prefs.clear();
+        //         snack(
+        //           'Cleared all data',
+        //           context,
+        //         );
+        //       });
+        //     },
+        //   )
+        // ],
       ),
       body: screens[index],
     );
