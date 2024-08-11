@@ -1,6 +1,6 @@
 final disasterData = [
   {
-    "image": "assets/images/google_icon.png",
+    "image": "assets/images/disasters/earthquake.png",
     "disaster_name": "Earthquake",
     "consequences": "Structural damage, landslides, tsunamis, loss of life",
     "preparedness": [

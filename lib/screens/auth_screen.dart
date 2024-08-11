@@ -3,9 +3,7 @@
 import 'dart:ui';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:disaster_ready/screens/first_screen.dart';
-// import 'package:disaster_ready/screens/first_screen.dart';
-import 'package:disaster_ready/util/snack.dart';
+import 'package:disaster_ready/widgets/phone_number.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -89,24 +87,29 @@ class _AuthScreenState extends State<AuthScreen> {
       prefs?.setString('email', userCredential.user!.email!);
     } on Exception catch (e) {
       print(e);
-      Future.delayed(const Duration(milliseconds: 400), () {
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(
-            builder: (context) => const FirstScreen(),
-          ),
-        );
-        snack('Signed in successfully!', context, color: Colors.green);
-        Future.delayed(const Duration(milliseconds: 400), () {
-          setState(() {
-            authing = false;
-          });
-        });
-      });
+      // Future.delayed(const Duration(milliseconds: 400), () {
+      //   Navigator.of(context).pushReplacement(
+      //     MaterialPageRoute(
+      //       builder: (context) => const FirstScreen(),
+      //     ),
+      // );
+      // snack('Signed in successfully!', context, color: Colors.green);
+      // Future.delayed(const Duration(milliseconds: 400), () {
+      //   setState(() {
+      //     authing = false;
+      //   });
+      // });
+      // });
 
       // snack('Authentication failed', context);
       setState(() {
         authing = false;
       });
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) => PhoneNumber(),
+        ),
+      );
     }
   }
 

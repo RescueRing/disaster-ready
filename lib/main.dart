@@ -106,6 +106,7 @@ class _MyAppState extends State<MyApp> {
       darkTheme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, snapshot) {
@@ -118,19 +119,14 @@ class _MyAppState extends State<MyApp> {
               ),
             );
           }
-          if (snapshot.hasData && snapshot.data != null) {
-            return const FirstScreen();
-          }
-          if (widget.authed) {
-            if (widget.phoneNumber == '' || !widget.permissionGiven) {
-              return PhoneNumber();
-            }
-            // return HomeScreen();
-            return const FirstScreen();
-          } else {
+          if (!widget.authed) {
             return const AuthScreen();
           }
-          // return const AuthScreen();
+          if (widget.phoneNumber.length >= 10) {
+            return const FirstScreen();
+          } else {
+            return PhoneNumber();
+          }
         },
       ),
     );
