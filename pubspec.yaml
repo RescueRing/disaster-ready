@@ -94,6 +94,7 @@ flutter:
   - assets/maps/
   - assets/images/disasters/
   - assets/markers/
+  - assets/images/screens/
   # - assets/maps/markers/
   # - assets/weatherData.json
   #   - images/a_dot_burr.jpeg

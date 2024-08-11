@@ -64,11 +64,6 @@ class _AuthScreenState extends State<AuthScreen> {
     setState(() {
       authing = true;
     });
-    // Future.delayed(const Duration(seconds: 20), () {
-    //   setState(() {
-    //     authing = false;
-    //   });
-    // });
     try {
       String android = dotenv.env['ANDROID_CLIENT_ID']!;
 
@@ -92,16 +87,6 @@ class _AuthScreenState extends State<AuthScreen> {
       final UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
       prefs?.setString('email', userCredential.user!.email!);
-      // FirebaseFirestore.instance
-      //     .collection('users')
-      //     .doc(userCredential.user?.email)
-      //     .set({
-      //   'email': userCredential.user?.email,
-      //   'name': userCredential.user?.displayName,
-      //   'photo': userCredential.user?.photoURL,
-      //   'uid': userCredential.user?.uid,
-      //   'deviceInfo': deviceInfo,
-      // });
     } on Exception catch (e) {
       print(e);
       Future.delayed(const Duration(milliseconds: 400), () {
@@ -110,9 +95,11 @@ class _AuthScreenState extends State<AuthScreen> {
             builder: (context) => const FirstScreen(),
           ),
         );
-        snack('Signed=in successfully', context, color: Colors.green);
-        setState(() {
-          authing = false;
+        snack('Signed in successfully!', context, color: Colors.green);
+        Future.delayed(const Duration(milliseconds: 400), () {
+          setState(() {
+            authing = false;
+          });
         });
       });
 
@@ -136,123 +123,112 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: GestureDetector(
+        onTap: () {
+          signInWithGoogle();
+        },
+        child: Container(
+          margin: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            backgroundBlendMode: BlendMode.darken,
+            color: Colors.blue.shade100,
+            borderRadius: BorderRadius.circular(30),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/google_icon.png',
+                height: 50,
+                width: 50,
+              ),
+              const Text(
+                "Continue with Google",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
+          color: Colors.blue.withOpacity(0.1),
           image: DecorationImage(
-            image: AssetImage('assets/images/bg2.jpeg'),
+            image: AssetImage('assets/images/screens/city_background.png'),
             fit: BoxFit.cover,
           ),
         ),
         height: double.infinity,
         width: double.infinity,
-        alignment: Alignment.center,
-        child: Container(
-          height: 500,
-          width: double.infinity,
-          margin: const EdgeInsets.symmetric(horizontal: 30),
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white),
-            borderRadius: BorderRadius.circular(15),
-            color: Colors.black.withOpacity(0.1),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20),
-            child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
-                child: Padding(
-                  padding: const EdgeInsets.all(25),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Center(
-                      //   child: ClipRRect(
-                      //     borderRadius: BorderRadius.circular(100),
-                      //     child: Image.asset(
-                      //       fit: BoxFit.cover,
-                      //       '_______icon_______',
-                      //       height: 100,
-                      //       width: 100,
-                      //     ),
-                      //   ),
-                      // ),
-                      // const Gap(8),
-                      Center(
-                        child: Text(
-                          "Welcome to !",
-                          style: GoogleFonts.exo2(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+        // alignment: Alignment.center,
+        child: Column(
+          children: [
+            Spacer(),
+            const Gap(600),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text('Rescue Ring',
+                        style: GoogleFonts.exo2(
+                          color: Colors.black,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text(
+                      'A network of support for those in need....',
+                      // textAlign: TextAlign.center,
+                      style: GoogleFonts.exo2(
+                        color: Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
-                      const Spacer(),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                'Unlock Your Future: Discover Your Ideal College Match!',
-                                // textAlign: TextAlign.center,
-                                style: GoogleFonts.exo2(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const Gap(6),
-                              const Text(
-                                'Tell us about your preferences, and let our website work its magic to predict the perfect colleges for you. Say goodbye to uncertainty and hello to your dream education!',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const Spacer(),
-                      GestureDetector(
-                        onTap: () {
-                          signInWithGoogle();
-                        },
-                        child: !authing
-                            ? Container(
-                                height: 40,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                    color: Colors.white,
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      'assets/images/google_icon.png',
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                    const Text(
-                                      "Continue with Google",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                      ),
-                      const Spacer(),
-                    ],
-                  ),
-                )),
-          ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const Spacer(),
+            // GestureDetector(
+            //   onTap: () {
+            //     signInWithGoogle();
+            //   },
+            //   child: !authing
+            //       ? Container(
+            //           height: 40,
+            //           width: double.infinity,
+            //           decoration: BoxDecoration(
+            //               color: Colors.white,
+            //               borderRadius: BorderRadius.circular(30)),
+            //           child: Row(
+            //             mainAxisAlignment: MainAxisAlignment.center,
+            //             children: [
+            //               Image.asset(
+            //                 'assets/images/google_icon.png',
+            //                 height: 50,
+            //                 width: 50,
+            //               ),
+            //               const Text(
+            //                 "Continue with Google",
+            //                 style: TextStyle(
+            //                   color: Colors.black,
+            //                   fontWeight: FontWeight.bold,
+            //                 ),
+            //               ),
+            //             ],
+            //           ),
+            //         )
+            //       : const Center(
+            //           child: CircularProgressIndicator(),
+            //         ),
+            // ),
+            const Spacer(),
+          ],
         ),
       ),
     );

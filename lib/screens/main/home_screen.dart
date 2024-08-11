@@ -1,5 +1,9 @@
+// ignore_for_file: collection_methods_unrelated_type
+
 import 'dart:async';
 
+// import 'package:disaster_ready/util/snack.dart';
+import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -7,7 +11,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  HomeScreen({super.key});
+  List<String> selectedHS = [];
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -18,7 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool isHelping = false;
   List<String> filters = ['Helping', 'Need Help'];
+  List<String> helpingOptions = [
+    'Volunteer',
+    'Donate',
+    'Provide Shelter',
+    'Food',
+    'Medical'
+  ];
 
+  List<String> seekingOptions = [
+    'Medical',
+    'Food',
+    'Shelter',
+    'Clothing',
+    'Other'
+  ];
   bool locationLoaded = false;
   late LatLng? currentLocation = LatLng(0, 0);
   late GoogleMapController mapController;
@@ -74,6 +93,50 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Widget helpingBuilder() {
+    return ListView.builder(
+      itemCount: helpingOptions.length + 1,
+      itemBuilder: (context, index) {
+        if (index == helpingOptions.length) {
+          return SizedBox(
+            height: 100,
+          );
+        }
+        return Card(
+          child: ListTile(
+            tileColor: widget.selectedHS.contains(helpingOptions[index])
+                ? Colors.blue.shade300
+                : null,
+            onTap: () {
+              if (widget.selectedHS.contains(helpingOptions[index])) {
+                setState(() {
+                  widget.selectedHS.remove(helpingOptions[index]);
+                });
+              } else {
+                setState(() {
+                  widget.selectedHS.add(helpingOptions[index]);
+                });
+              }
+              setState(() {
+                print(widget.selectedHS);
+              });
+            },
+            leading: Icon(
+              helpIcons[helpingOptions[index]],
+              color: !widget.selectedHS.contains(helpingOptions[index])
+                  ? Colors.blue
+                  : Colors.white,
+            ),
+            title: Text(
+              helpingOptions[index],
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void getCurrentLocation() async {
     var position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -83,12 +146,19 @@ class _HomeScreenState extends State<HomeScreen> {
       currentPosition = CameraPosition(target: currentLocation!, zoom: 15.0);
       locationLoaded = true;
     });
-    // Future.delayed(Duration(milliseconds: 1000), () {
-    //   setState(() {
-
-    //   });
-    // });
   }
+
+  Map<String, IconData> helpIcons = {
+    'Volunteer': Icons.volunteer_activism,
+    'Donate': Icons.monetization_on,
+    'Provide Shelter': Icons.house,
+    'Offer Food': Icons.food_bank,
+    'Medical': Icons.medical_services,
+    'Shelter': Icons.house,
+    'Food': Icons.fastfood,
+    'Clothing': Icons.checkroom,
+    'Other': Icons.help_outline,
+  };
 
   Widget buildFloatingActionButton({
     required bool isHelping,
@@ -100,15 +170,206 @@ class _HomeScreenState extends State<HomeScreen> {
           ? Color.fromARGB(255, 137, 202, 255)
           : Color.fromARGB(255, 250, 121, 121),
       onPressed: () {
-        print('Helping: $isHelping');
-        print('Location: $currentLocation');
-        print('Filter: $selectedFilter');
+        // print('Helping: $isHelping');
+        // print('Location: $currentLocation');
+        // print('Filter: $selectedFilter');
       },
-      child: Icon(
-        isHelping
-            ? FontAwesomeIcons.handHoldingHeart
-            : FontAwesomeIcons.handsHelping,
-        color: Colors.white,
+      child: GestureDetector(
+        onTap: () {
+          // print('Helping: $isHelping');
+          // print('Location: $currentLocation');
+          // print('Filter: $selectedFilter');
+          showModalBottomSheet(
+            isScrollControlled: true,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+            ),
+            enableDrag: true,
+            showDragHandle: true,
+            context: context,
+            builder: (BuildContext context) {
+              return StatefulBuilder(
+                builder: (BuildContext context, StateSetter setState) =>
+                    Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    height: 470,
+
+                    // color: Colors.blue,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          TextField(
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                            ),
+                            controller: TextEditingController(
+                                text: isHelping ? 'Helping' : 'Seeking Help'),
+                            decoration: InputDecoration(
+                              prefixIconColor: Colors.red,
+                              prefixIcon: Icon(
+                                isHelping
+                                    ? FontAwesomeIcons.handHoldingHeart
+                                    : FontAwesomeIcons.handsHelping,
+                                color: Colors.red.shade300,
+                              ),
+                            ),
+                            enabled: false,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          if (isHelping)
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: helpingOptions.length,
+                                itemBuilder: (context, index) {
+                                  // if (index == helpingOptions.length) {
+                                  //   return SizedBox(
+                                  //     height: 30,
+                                  //   );
+                                  // }
+                                  return Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        side: BorderSide(
+                                            color: Colors.blue.shade300,
+                                            width: 2)),
+                                    child: ListTile(
+                                      // style: ListTileStyle.drawer,
+                                      // dense: true,
+                                      tileColor: widget.selectedHS
+                                              .contains(helpingOptions[index])
+                                          ? Colors.blue.shade300
+                                          : null,
+                                      onTap: () {
+                                        if (widget.selectedHS
+                                            .contains(helpingOptions[index])) {
+                                          setState(() {
+                                            widget.selectedHS
+                                                .remove(helpingOptions[index]);
+                                          });
+                                        } else {
+                                          setState(() {
+                                            widget.selectedHS
+                                                .add(helpingOptions[index]);
+                                          });
+                                        }
+                                        setState(() {
+                                          print(widget.selectedHS);
+                                        });
+                                      },
+                                      leading: Icon(
+                                        helpIcons[helpingOptions[index]],
+                                        color: !widget.selectedHS
+                                                .contains(helpingOptions[index])
+                                            ? Colors.blue
+                                            : Colors.white,
+                                      ),
+                                      title: Text(
+                                        helpingOptions[index],
+                                        style: const TextStyle(fontSize: 18),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          if (!isHelping)
+                            Expanded(
+                              child: ListView.builder(
+                                itemCount: helpingOptions.length,
+                                itemBuilder: (context, index) {
+                                  // if (index == helpingOptions.length) {
+                                  //   return SizedBox(
+                                  //     height: 30,
+                                  //   );
+                                  // }
+                                  return Card(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(20),
+                                        side: BorderSide(
+                                            color: Colors.blue.shade300,
+                                            width: 2)),
+                                    child: ListTile(
+                                      // style: ListTileStyle.drawer,
+                                      // dense: true,
+                                      tileColor: widget.selectedHS
+                                              .contains(helpingOptions[index])
+                                          ? Colors.blue.shade300
+                                          : null,
+                                      onTap: () {
+                                        if (widget.selectedHS
+                                            .contains(helpingOptions[index])) {
+                                          setState(() {
+                                            widget.selectedHS
+                                                .remove(helpingOptions[index]);
+                                          });
+                                        } else {
+                                          setState(() {
+                                            widget.selectedHS
+                                                .add(helpingOptions[index]);
+                                          });
+                                        }
+                                        setState(() {
+                                          print(widget.selectedHS);
+                                        });
+                                      },
+                                      leading: Icon(
+                                        helpIcons[helpingOptions[index]],
+                                        color: !widget.selectedHS
+                                                .contains(helpingOptions[index])
+                                            ? Colors.blue
+                                            : Colors.white,
+                                      ),
+                                      title: Text(
+                                        helpingOptions[index],
+                                        style: const TextStyle(fontSize: 18),
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          // Text('Filter: $selectedFilter'),
+                          // SizedBox(
+                          //   height: 20,
+                          // ),
+                          if (widget.selectedHS.isNotEmpty)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blue.shade100,
+                                side: BorderSide(
+                                  color: Colors.blue.shade300,
+                                  width: 2,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              onPressed: () {
+                                widget.selectedHS = [];
+                                snack('Submitted successfully!', context,
+                                    color: Colors.green);
+                              },
+                              child: Text('Submit'),
+                            )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          );
+        },
+        child: Icon(
+          isHelping
+              ? FontAwesomeIcons.handHoldingHeart
+              : FontAwesomeIcons.handsHelping,
+          color: Colors.white,
+        ),
       ),
     );
   }
@@ -148,6 +409,9 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           locationLoaded
               ? GoogleMap(
+                  onTap: (argument) {
+                    print(argument);
+                  },
                   myLocationEnabled: true,
                   myLocationButtonEnabled: false,
                   compassEnabled: false,
@@ -156,7 +420,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   initialCameraPosition: currentPosition!,
                   onCameraMove: (position) => currentPosition = position,
                   zoomControlsEnabled: false,
-                )
+                  markers: {
+                      Marker(
+                        markerId: MarkerId('currentLocation'),
+                        icon: BitmapDescriptor.defaultMarker,
+                        position: currentLocation!,
+                      ),
+                      Marker(
+                        markerId: MarkerId('currentLocation'),
+                        position: LatLng(13.009, 77.537203),
+                      )
+                    })
               : Center(child: CircularProgressIndicator()),
           recenterButton(controllerCompleter, currentLocation!),
           helpOrSeek(

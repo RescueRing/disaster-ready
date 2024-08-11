@@ -18,14 +18,12 @@ class _FirstScreenState extends State<FirstScreen> {
   List<Widget> screens = [
     HomeScreen(),
     const AddEmergencyNumber(),
-    TempScreen(),
     SchemesScreen(),
     DisasterScreen(),
   ];
   List<String> titles = [
     'Home',
     'Edit Emergency Number',
-    'Temp',
     'Government Schemes',
     'Disaster Guide'
   ];
