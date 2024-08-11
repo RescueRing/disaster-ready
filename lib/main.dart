@@ -3,7 +3,7 @@
 // import 'package:disaster_ready/screens/add_emergency_number.dart';
 import 'package:disaster_ready/screens/auth_screen.dart';
 import 'package:disaster_ready/screens/first_screen.dart';
-import 'package:disaster_ready/screens/home_screen.dart';
+// import 'package:disaster_ready/screens/home_screen.dart';
 // import 'package:disaster_ready/widgets/fetch_permissions.dart';
 import 'package:disaster_ready/widgets/phone_number.dart';
 import 'package:firebase_auth/firebase_auth.dart';

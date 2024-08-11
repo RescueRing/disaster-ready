@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:disaster_ready/models/disaster_data.dart';
 import 'package:disaster_ready/models/schemes_data.dart';
 import 'package:flutter/material.dart';
@@ -102,41 +104,57 @@ class _DisasterScreenState extends State<DisasterScreen> {
               ),
             ),
             SizedBox(height: 10),
-            ListTile(
-              title: Text(
-                disasterData[widget.selectedIndex]['disaster_name'].toString(),
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              subtitle: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 10),
-                  Text('Consequences',
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  Text('${disasterData[widget.selectedIndex]['consequences']}'),
-                  SizedBox(height: 10),
-                  // Text(
-                  //     'Precautions: ${disasterData[widget.selectedIndex]['precautions']}'),
-                  SizedBox(height: 10),
-                  Text('Preparedness',
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  SizedBox(height: 10),
-                  for (int i = 0;
-                      i <
-                          (disasterData[widget.selectedIndex]['preparedness']
-                                  as List)
-                              .length;
-                      i++)
-                    Text(
-                        '${i + 1}. ${(disasterData[widget.selectedIndex]['preparedness'] as List)[i]}'),
-                  Text(
-                      "Emergency Contact: ${disasterData[widget.selectedIndex]['emergency_contact']}"),
-                  // Text(
-                  //     'Description: ${disasterData[widget.selectedIndex]['preparedness']}'),
-                  // Text(
-                  //     'Emergency Contact: ${disasterData[widget.selectedIndex]['emergency_contact']}'),
-                ],
+            Container(
+              child: ListTile(
+                title: Card(
+                  color: Colors.blue.shade800,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      disasterData[widget.selectedIndex]['disaster_name']
+                          .toString(),
+                      style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ),
+                ),
+                subtitle: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // const SizedBox(height: 10),
+                      Text('Consequences',
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                          '${disasterData[widget.selectedIndex]['consequences']}'),
+                      SizedBox(height: 10),
+                      // Text(
+                      //     'Precautions: ${disasterData[widget.selectedIndex]['precautions']}'),
+                      SizedBox(height: 10),
+                      Text('Preparedness',
+                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      SizedBox(height: 10),
+                      for (int i = 0;
+                          i <
+                              (disasterData[widget.selectedIndex]
+                                      ['preparedness'] as List)
+                                  .length;
+                          i++)
+                        Text(
+                            '${i + 1}. ${(disasterData[widget.selectedIndex]['preparedness'] as List)[i]}'),
+                      Text(
+                          "Emergency Contact: ${disasterData[widget.selectedIndex]['emergency_contact']}"),
+                      // Text(
+                      //     'Description: ${disasterData[widget.selectedIndex]['preparedness']}'),
+                      // Text(
+                      //     'Emergency Contact: ${disasterData[widget.selectedIndex]['emergency_contact']}'),
+                    ],
+                  ),
+                ),
               ),
             )
           ],
