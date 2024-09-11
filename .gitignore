@@ -71,3 +71,4 @@ lib/firebase_options.dart
 .metadata
 .env
 lib/screens/temp_home.dart
+android/app/src/main/AndroidManifest.xml
