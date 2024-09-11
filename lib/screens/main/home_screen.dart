@@ -1,11 +1,11 @@
-// ignore_for_file: collection_methods_unrelated_type
+// ignore_for_file: collection_methods_unrelated_type, must_be_immutable
 
 import 'dart:async';
-
-// import 'package:disaster_ready/util/snack.dart';
+import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disaster_ready/models/marker_details.dart';
+import 'package:disaster_ready/util/ModalBottomSheet.dart';
 import 'package:disaster_ready/util/snack.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -25,6 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
   late CameraPosition? currentPosition;
 
   bool isHelping = false;
+  String name = '';
+  String email = '';
   List<String> filters = ['Helping', 'Need Help'];
   List<String> helpingOptions = [
     'Volunteer',
@@ -46,59 +48,183 @@ class _HomeScreenState extends State<HomeScreen> {
   late GoogleMapController mapController;
   Completer<GoogleMapController> controllerCompleter = Completer();
   List<Marker> markersList = [];
+  List<MarkerDetails> markers = [];
+
+  void initPrefs() {
+    SharedPreferences.getInstance().then((value) {
+      name = value.getString('name') ?? 'Name 1';
+      email = value.getString('email') ?? 'email.com';
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    initPrefs();
     getCurrentLocation();
-    FireToMarker();
-    print('Init state');
+    setupMarkerListener();
+    // FireToMarker();
+    // print('Init state');
   }
 
-  void FireToMarker() async {
-    print('Fire to marker');
-    List<Marker> markers = [];
-    List<String> contacts = [];
-    List<Map<String, dynamic>> data = await FirebaseFirestore.instance
-        .collection('main')
-        .doc('locations')
-        .get()
-        .then((value) {
-      List<dynamic> rawData = value.data()!['location'];
-      return rawData.cast<Map<String, dynamic>>();
-    });
+  void displayInfo(MarkerDetails markerDetails) {
+    showDialog(
+      useSafeArea: true,
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(markerDetails.selectedFilter[0]),
+          actions: [
+            if (markerDetails.email == email)
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Close'),
+              ),
+            if (markerDetails.email != email)
+              ElevatedButton(onPressed: () {}, child: Text("Remove Marker")),
+            ElevatedButton.icon(
+              onPressed: () {},
+              label: Text('Ask for help'),
+              icon: Icon(Icons.call),
+            ),
+          ],
+          content: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(markerDetails.phone),
+              Text('Latitude: ${markerDetails.latitude}'),
+              Text('Longitude: ${markerDetails.longitude}'),
+            ],
+          ),
+        );
+        return Center(
+          child: SizedBox(
+            height: 300,
+            child: AlertDialog(
+              title: Text(markerDetails.selectedFilter[0]),
+              content: Column(
+                children: [
+                  Text(markerDetails.phone),
+                  Text('Latitude: ${markerDetails.latitude}'),
+                  Text('Longitude: ${markerDetails.longitude}'),
 
+                  // Text('Selected Filters: ${selectedFilters[0]}'),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  void updateMarkers(List<Map<String, dynamic>> data) {
+    List<Marker> newMarkers = [];
+    print('In updateMarkers');
     for (var i in data) {
-      markers.add(Marker(
-        markerId: MarkerId(i['phone']),
+      MarkerDetails markerDetails = MarkerDetails.fromJson(i);
+      // print(markerDetails);
+      markers.add(markerDetails);
+      // print(markerDetails.latitude);
+      // print(markerDetails.longitude);
+      // print(markerDetails.phone);
+      // print(markerDetails.email);
+      // print(markerDetails.isHelping);
+      // print(markerDetails.address);
+      newMarkers.add(Marker(
+        markerId: MarkerId(
+            '${markerDetails.phone}-${markerDetails.latitude}-${markerDetails.longitude}'),
         position:
             LatLng(double.parse(i['latitude']), double.parse(i['longitude'])),
-        icon: BitmapDescriptor.defaultMarker,
+        infoWindow: InfoWindow(title: 'Chetan'),
+        onTap: () {
+          displayInfo(markerDetails);
+          // showModalBottomSheet(
+          //     context: context,
+          //     builder: (context) {
+          //       return Container(
+          //         height: 200,
+          //         child: Column(
+          //           children: [
+          //             Text(i['name']),
+          //             Text(i['phone']),
+          //             Text(i['address']),
+          //           ],
+          //         ),
+          //       );
+          //     });
+        },
       ));
-      contacts.add(i['phone']);
     }
-
-    print(data);
-    // print('Fire to marker');
-    // List<Marker> markers = [];
-    // List<String> contacts = [];
-    // List<Map<String, dynamic>> data = await FirebaseFirestore.instance
-    //     .collection('main')
-    //     .doc('locations')
-    //     .get()
-    //     .then((value) => value.data()!['location']);
-    // for (var i in data) {
-    //   markers.add(Marker(
-    //     markerId: MarkerId(i['phone']),
-    //     position:
-    //         LatLng(double.parse(i['latitude']), double.parse(i['longitude'])),
-    //     icon: BitmapDescriptor.defaultMarker,
-    //   ));
-    //   contacts.add(i['phone']);
-    // }
-
-    // print(data);
+    setState(() {
+      markersList = newMarkers;
+    });
   }
+
+  void setupMarkerListener() {
+    FirebaseFirestore.instance
+        .collection('main')
+        .doc('locations')
+        .snapshots()
+        .listen((snapshot) {
+      if (snapshot.exists) {
+        log(0);
+        print('Snapshot exists');
+        List<dynamic> rawData = snapshot.data()!['location'];
+        List<Map<String, dynamic>> data = rawData.cast<Map<String, dynamic>>();
+        // print(data);
+        updateMarkers(data);
+      }
+    });
+  }
+
+  // void FireToMarker() async {
+  //   // print('Fire to marker');
+  //   List<Marker> markers = [];
+  //   List<String> contacts = [];
+  //   List<Map<String, dynamic>> data = await FirebaseFirestore.instance
+  //       .collection('main')
+  //       .doc('locations')
+  //       .get()
+  //       .then((value) {
+  //     List<dynamic> rawData = value.data()!['location'];
+  //     return rawData.cast<Map<String, dynamic>>();
+  //   });
+
+  //   for (var i in data) {
+  //     markers.add(Marker(
+  //       markerId: MarkerId(i['phone']),
+  //       position:
+  //           LatLng(double.parse(i['latitude']), double.parse(i['longitude'])),
+  //       icon: BitmapDescriptor.defaultMarker,
+  //     ));
+  //     contacts.add(i['phone']);
+  //   }
+
+  //   print(data);
+  //   // print('Fire to marker');
+  //   // List<Marker> markers = [];
+  //   // List<String> contacts = [];
+  //   // List<Map<String, dynamic>> data = await FirebaseFirestore.instance
+  //   //     .collection('main')
+  //   //     .doc('locations')
+  //   //     .get()
+  //   //     .then((value) => value.data()!['location']);
+  //   // for (var i in data) {
+  //   //   markers.add(Marker(
+  //   //     markerId: MarkerId(i['phone']),
+  //   //     position:
+  //   //         LatLng(double.parse(i['latitude']), double.parse(i['longitude'])),
+  //   //     icon: BitmapDescriptor.defaultMarker,
+  //   //   ));
+  //   //   contacts.add(i['phone']);
+  //   // }
+
+  //   // print(data);
+  // }
 
   Widget helpOrSeek(isHelping, currentLocation, selectedFilter) {
     return Positioned(
@@ -122,7 +248,9 @@ class _HomeScreenState extends State<HomeScreen> {
           'longitude': location.longitude.toString(),
           'isHelping': isHelping,
           'selectedFilter': selectedFilter,
-          'phone': phone
+          'phone': phone,
+          'email': email,
+          'name': name,
         }
       ])
     });
@@ -214,7 +342,7 @@ class _HomeScreenState extends State<HomeScreen> {
       currentPosition = CameraPosition(target: currentLocation!, zoom: 15.0);
       locationLoaded = true;
     });
-    FireToMarker();
+    // FireToMarker();
   }
 
   Map<String, IconData> helpIcons = {
@@ -245,6 +373,16 @@ class _HomeScreenState extends State<HomeScreen> {
       },
       child: GestureDetector(
         onTap: () {
+          ModelBottomSheet(
+            context,
+            isHelping,
+            isHelping ? helpingOptions : seekingOptions,
+            helpIcons,
+            sendToFire,
+            currentLocation,
+          );
+
+          return;
           // print('Helping: $isHelping');
           // print('Location: $currentLocation');
           // print('Filter: $selectedFilter');
@@ -668,10 +806,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                           },
                                         ),
                                       ),
-                                    // Text('Filter: $selectedFilter'),
-                                    // SizedBox(
-                                    //   height: 20,
-                                    // ),
                                     if (widget.selectedHS.isNotEmpty)
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
@@ -713,22 +847,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   initialCameraPosition: currentPosition!,
                   onCameraMove: (position) => currentPosition = position,
                   zoomControlsEnabled: false,
-                  markers: {
-                      Marker(
-                        markerId: MarkerId('currentLocation'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: LatLng(13.0091, 77.530203),
-                      ),
-                      Marker(
-                        markerId: MarkerId('currentLocation'),
-                        icon: BitmapDescriptor.defaultMarker,
-                        position: currentLocation!,
-                      ),
-                      Marker(
-                        markerId: MarkerId('currentLocation'),
-                        position: LatLng(13.009, 77.537203),
-                      )
-                    })
+                  markers: markersList.toSet(),
+                )
               : Center(child: CircularProgressIndicator()),
           recenterButton(controllerCompleter, currentLocation!),
           helpOrSeek(

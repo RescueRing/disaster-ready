@@ -1,4 +1,4 @@
-import 'package:disaster_ready/models/schemes_data.dart';
+import 'package:disaster_ready/data/schemes_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
