@@ -60,6 +60,7 @@ dependencies:
   telephony: ^0.2.0
   toggle_switch: ^2.3.0
   flutter_riverpod: ^2.5.1
+  auto_size_text_field: ^2.2.4
 
 dev_dependencies:
   flutter_test:
