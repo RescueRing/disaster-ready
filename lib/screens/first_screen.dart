@@ -4,6 +4,7 @@ import 'package:disaster_ready/screens/main/home_screen.dart';
 import 'package:disaster_ready/screens/main/schemes_screen.dart';
 // import 'package:disaster_ready/util/snack.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class FirstScreen extends StatefulWidget {
@@ -14,12 +15,27 @@ class FirstScreen extends StatefulWidget {
 }
 
 class _FirstScreenState extends State<FirstScreen> {
+  @override
+  void initState() {
+    super.initState();
+    SharedPreferences.getInstance().then((prefs) {
+      if (prefs.getInt('screenIndex') != null) {
+        setState(() {
+          index = prefs.getInt('screenIndex')!;
+        });
+      } else {
+        prefs.setInt('screenIndex', 0);
+      }
+    });
+  }
+
   List<Widget> screens = [
     HomeScreen(),
     const AddEmergencyNumber(),
     SchemesScreen(),
     DisasterScreen(),
   ];
+
   List<String> titles = [
     'Rescue Ring',
     'Edit Emergency Number',
@@ -47,8 +63,6 @@ class _FirstScreenState extends State<FirstScreen> {
               ),
               child: Expanded(
                 child: Stack(
-                  // mainAxisAlignment: MainAxisAlignment.start,
-                  // crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Positioned(
                       top: 5,
@@ -94,6 +108,9 @@ class _FirstScreenState extends State<FirstScreen> {
                 onTap: () {
                   setState(() {
                     index = i;
+                  });
+                  SharedPreferences.getInstance().then((prefs) {
+                    prefs.setInt('screenIndex', i);
                   });
                   Navigator.pop(context);
                 },

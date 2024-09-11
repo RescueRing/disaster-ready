@@ -31,7 +31,6 @@ class SchemesScreen extends StatelessWidget {
                     children: [
                       ListTile(
                         title: Card(
-                          // color: Color.fromRGBO(55, 0, 179, 0),
                           color: Colors.blue.shade900,
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),

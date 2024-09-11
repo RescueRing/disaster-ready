@@ -11,7 +11,7 @@ final disasterData = [
     ],
     "emergency_contact": {
       "name": "National Disaster Management Authority (NDMA)",
-      "number": ["011-26701728", "011-26701729"]
+      "number": "011-26701728"
     }
   },
   {
@@ -87,8 +87,10 @@ final disasterData = [
       "Avoid the beach and low-lying coastal areas.",
       "Prepare an emergency kit and keep it accessible."
     ],
-    "emergency_contact":
-        "Indian National Centre for Ocean Information Services (INCOIS): 040-23895011"
+    "emergency_contact": {
+      "name": "Indian National Centre for Ocean Information Services (INCOIS)",
+      "number": "040-23895011"
+    }
   },
   {
     "disaster_name": "Volcanic Eruption",

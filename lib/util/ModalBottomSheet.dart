@@ -1,7 +1,8 @@
-// import 'package:disaster_ready/providers/marker_provider.dart';
-import 'package:disaster_ready/util/snack.dart';
+// ignore_for_file: non_constant_identifier_names
+
+import 'package:disaster_ready/util/helper_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -25,13 +26,10 @@ void ModelBottomSheet(
       List selectedHS = [];
       return StatefulBuilder(
         builder: (context, setState) {
-          //ref.watch(markedLocationProvider);
           return Padding(
             padding: const EdgeInsets.all(20.0),
             child: SizedBox(
               height: 400,
-
-              // color: Colors.blue,
               child: Center(
                 child: Column(
                   children: [
@@ -56,112 +54,94 @@ void ModelBottomSheet(
                     SizedBox(
                       height: 10,
                     ),
-                    if (isHelping)
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: helpingOptions.length,
-                          itemBuilder: (context, index) {
-                            // if (index == helpingOptions.length) {
-                            //   return SizedBox(
-                            //     height: 30,
-                            //   );
-                            // }
-                            return Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  side: BorderSide(
-                                      color: Colors.blue.shade300, width: 2)),
-                              child: ListTile(
-                                // style: ListTileStyle.drawer,
-                                // dense: true,
-                                tileColor:
-                                    selectedHS.contains(helpingOptions[index])
-                                        ? Colors.blue.shade300
-                                        : null,
-                                onTap: () {
-                                  if (selectedHS
-                                      .contains(helpingOptions[index])) {
-                                    setState!(() {
-                                      selectedHS.remove(helpingOptions[index]);
-                                    });
-                                  } else {
-                                    setState(() {
-                                      selectedHS.add(helpingOptions[index]);
-                                    });
-                                  }
+                    // if (isHelping)
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: helpingOptions.length,
+                        itemBuilder: (context, index) {
+                          return Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                                side: BorderSide(
+                                    color: Colors.blue.shade300, width: 2)),
+                            child: ListTile(
+                              tileColor:
+                                  selectedHS.contains(helpingOptions[index])
+                                      ? Colors.blue.shade300
+                                      : null,
+                              onTap: () {
+                                if (selectedHS
+                                    .contains(helpingOptions[index])) {
                                   setState(() {
-                                    print(selectedHS);
+                                    selectedHS.remove(helpingOptions[index]);
                                   });
-                                },
-                                leading: Icon(
-                                  helpIcons[helpingOptions[index]],
-                                  color: !selectedHS
-                                          .contains(helpingOptions[index])
-                                      ? Colors.blue
-                                      : Colors.white,
-                                ),
-                                title: Text(
-                                  helpingOptions[index],
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    if (!isHelping)
-                      Expanded(
-                        child: ListView.builder(
-                          itemCount: helpingOptions.length,
-                          itemBuilder: (context, index) {
-                            // if (index == helpingOptions.length) {
-                            //   return SizedBox(
-                            //     height: 30,
-                            //   );
-                            // }
-                            return Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                  side: BorderSide(
-                                      color: Colors.blue.shade300, width: 2)),
-                              child: ListTile(
-                                // style: ListTileStyle.drawer,
-                                // dense: true,
-                                tileColor:
-                                    selectedHS.contains(helpingOptions[index])
-                                        ? Colors.blue.shade300
-                                        : null,
-                                onTap: () {
-                                  if (selectedHS
-                                      .contains(helpingOptions[index])) {
-                                    setState(() {
-                                      selectedHS.remove(helpingOptions[index]);
-                                    });
-                                  } else {
-                                    setState(() {
-                                      selectedHS.add(helpingOptions[index]);
-                                    });
-                                  }
+                                } else {
                                   setState(() {
-                                    print(selectedHS);
+                                    selectedHS.add(helpingOptions[index]);
                                   });
-                                },
-                                leading: Icon(
-                                  helpIcons[helpingOptions[index]],
-                                  color: !selectedHS
-                                          .contains(helpingOptions[index])
-                                      ? Colors.blue
-                                      : Colors.white,
-                                ),
-                                title: Text(
-                                  helpingOptions[index],
-                                  style: const TextStyle(fontSize: 18),
-                                ),
+                                }
+                                setState(() {});
+                              },
+                              leading: Icon(
+                                helpIcons[helpingOptions[index]],
+                                color:
+                                    !selectedHS.contains(helpingOptions[index])
+                                        ? Colors.blue
+                                        : Colors.white,
                               ),
-                            );
-                          },
-                        ),
+                              title: Text(
+                                helpingOptions[index],
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          );
+                        },
                       ),
+                    ),
+                    // if (!isHelping)
+                    //   Expanded(
+                    //     child: ListView.builder(
+                    //       itemCount: helpingOptions.length,
+                    //       itemBuilder: (context, index) {
+                    //         return Card(
+                    //           shape: RoundedRectangleBorder(
+                    //               borderRadius: BorderRadius.circular(20),
+                    //               side: BorderSide(
+                    //                   color: Colors.blue.shade300, width: 2)),
+                    //           child: ListTile(
+                    //             tileColor:
+                    //                 selectedHS.contains(helpingOptions[index])
+                    //                     ? Colors.blue.shade300
+                    //                     : null,
+                    //             onTap: () {
+                    //               if (selectedHS
+                    //                   .contains(helpingOptions[index])) {
+                    //                 setState(() {
+                    //                   selectedHS.remove(helpingOptions[index]);
+                    //                 });
+                    //               } else {
+                    //                 setState(() {
+                    //                   selectedHS.add(helpingOptions[index]);
+                    //                 });
+                    //               }
+                    //               setState(() {});
+                    //             },
+                    //             leading: Icon(
+                    //               helpIcons[helpingOptions[index]],
+                    //               color: !selectedHS
+                    //                       .contains(helpingOptions[index])
+                    //                   ? Colors.blue
+                    //                   : Colors.white,
+                    //             ),
+                    //             title: Text(
+                    //               helpingOptions[index],
+                    //               style: const TextStyle(fontSize: 18),
+                    //             ),
+                    //           ),
+                    //         );
+                    //       },
+                    //     ),
+                    //   ),
                     if (selectedHS.isNotEmpty)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
