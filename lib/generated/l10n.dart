@@ -55,7 +55,7 @@ class S {
     return Intl.message(
       'Hello',
       name: 'hello',
-      desc: '',
+      desc: 'Hello message',
       args: [],
     );
   }
@@ -85,6 +85,16 @@ class S {
     return Intl.message(
       'Rescue Ring',
       name: 'rescuering',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `A network of support for those in need`
+  String get rescuedescription {
+    return Intl.message(
+      'A network of support for those in need',
+      name: 'rescuedescription',
       desc: '',
       args: [],
     );
@@ -369,6 +379,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get done {
+    return Intl.message(
+      'Done',
+      name: 'done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Add`
+  String get add {
+    return Intl.message(
+      'Add',
+      name: 'add',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Consequences`
+  String get consequences {
+    return Intl.message(
+      'Consequences',
+      name: 'consequences',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preparedness`
+  String get Preparedness {
+    return Intl.message(
+      'Preparedness',
+      name: 'Preparedness',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Emergency Contact`
+  String get emergencyContact {
+    return Intl.message(
+      'Emergency Contact',
+      name: 'emergencyContact',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Target Beneficiaries`
+  String get targetBeneficiaries {
+    return Intl.message(
+      'Target Beneficiaries',
+      name: 'targetBeneficiaries',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Provided Benefits`
+  String get providedBenifits {
+    return Intl.message(
+      'Provided Benefits',
+      name: 'providedBenifits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `How to Access`
+  String get howToAccess {
+    return Intl.message(
+      'How to Access',
+      name: 'howToAccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Visit Website`
+  String get visitWebsite {
+    return Intl.message(
+      'Visit Website',
+      name: 'visitWebsite',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Call`
+  String get call {
+    return Intl.message(
+      'Call',
+      name: 'call',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Eruption`
+  String get volcanicEruption {
+    return Intl.message(
+      'Eruption',
+      name: 'volcanicEruption',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
@@ -378,7 +508,7 @@ class AppLocalizationDelegate extends LocalizationsDelegate<S> {
     return const <Locale>[
       Locale.fromSubtags(languageCode: 'en'),
       Locale.fromSubtags(languageCode: 'es'),
-      Locale.fromSubtags(languageCode: 'kan'),
+      Locale.fromSubtags(languageCode: 'kn'),
       Locale.fromSubtags(languageCode: 'messages'),
     ];
   }

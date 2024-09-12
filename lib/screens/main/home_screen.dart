@@ -1,7 +1,9 @@
 // ignore_for_file: collection_methods_unrelated_type, must_be_immutable, deprecated_member_use
 
 import 'dart:async';
+import 'package:text_responsive/text_responsive.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:disaster_ready/generated/l10n.dart';
 import 'package:disaster_ready/models/marker_details.dart';
 import 'package:disaster_ready/util/ModalBottomSheet.dart';
 import 'package:disaster_ready/util/helper_functions.dart';
@@ -13,8 +15,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({super.key});
+  HomeScreen({super.key, required this.context});
+
   List<String> selectedHS = [];
+  BuildContext context;
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -22,18 +26,35 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late CameraPosition? currentPosition;
-
+  var multiLanguage;
   bool isHelping = false;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   multiLanguage = S.of(widget.context);
+  //   // Rest of the code...
+  // }
+
   String name = '';
   String email = '';
-  List<String> filters = ['Helping', 'Need Help'];
-  List<String> helpingOptions = [
-    'Volunteer',
-    'Donate',
-    'Provide Shelter',
-    'Food',
-    'Medical'
-  ];
+  List<String> filters = [];
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   // Rest of the code...
+  // }
+
+  List<String>? helpingOptions;
+  // [
+  //   'Volunteer',
+  //   'Donate',
+  //   'Provide Shelter',
+  //   'Food',
+  //   'Medical'
+  // ];
 
   List<String> seekingOptions = [
     'Medical',
@@ -60,6 +81,21 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     initPrefs();
+    filters = [S.of(widget.context).helping, S.of(widget.context).seekHelp];
+    helpingOptions = [
+      S.of(widget.context).volunteer,
+      S.of(widget.context).donate,
+      S.of(widget.context).provideShelter,
+      S.of(widget.context).food,
+      S.of(widget.context).medical
+    ];
+    seekingOptions = [
+      S.of(widget.context).medical,
+      S.of(widget.context).food,
+      S.of(widget.context).shelter,
+      S.of(widget.context).clothing,
+      S.of(widget.context).other
+    ];
     getCurrentLocation();
     setupMarkerListener();
   }
@@ -71,7 +107,16 @@ class _HomeScreenState extends State<HomeScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(markerDetails.selectedFilter[0]),
+          title: ParagraphTextWidget(
+            markerDetails.selectedFilter[0],
+            // softWrap: true,
+            // style: TextStyle(
+            //   fontSize: 12.0,
+            //   overflow: TextOverflow.visible,
+            // ),
+            // overflow: TextOverflow.visible
+            // markerDetails.name,
+          ),
           actions: [
             if (markerDetails.email == email)
               TextButton(
@@ -84,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ElevatedButton(onPressed: () {}, child: Text("Remove Marker")),
             ElevatedButton.icon(
               onPressed: () {},
-              label: Text('Ask for help'),
+              label: Text(S.of(context).seekHelp),
               icon: Icon(Icons.call),
             ),
           ],
@@ -228,7 +273,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ModelBottomSheet(
           context,
           isHelping,
-          isHelping ? helpingOptions : seekingOptions,
+          isHelping ? helpingOptions! : seekingOptions!,
           helpIcons,
           sendToFire,
           currentLocation,

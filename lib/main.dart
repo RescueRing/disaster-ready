@@ -31,11 +31,11 @@ void main() async {
   );
   runApp(prv.ChangeNotifierProvider(
     create: (context) {
-      final localeProvider = LocaleProvider(Locale('en'));
+      final localeProvider = LocaleProvider(Locale('kn'));
       if (prefs.getString('locale') != null) {
-        localeProvider.setLocale(const Locale('en'));
+        localeProvider.setLocale(const Locale('kn'));
       } else {
-        localeProvider.setLocale(const Locale('en'));
+        localeProvider.setLocale(const Locale('kn'));
       }
       return localeProvider;
     },
@@ -121,9 +121,6 @@ class _MyAppState extends State<MyApp> {
       // .copyWith(
       //   textTheme: GoogleFonts.exo2TextTheme(),
       // ),
-      darkTheme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
       debugShowCheckedModeBanner: false,
       home: StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),

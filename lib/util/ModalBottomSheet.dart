@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'package:disaster_ready/generated/l10n.dart';
 import 'package:disaster_ready/util/helper_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -39,9 +40,11 @@ void ModelBottomSheet(
                         fontSize: 20,
                       ),
                       controller: TextEditingController(
-                          text: isHelping ? 'Helping' : 'Seeking Help'),
+                          text: isHelping
+                              ? S.of(context).helping
+                              : S.of(context).needHelp),
                       decoration: InputDecoration(
-                        prefixIconColor: Colors.red,
+                        prefixIconColor: const Color.fromRGBO(244, 67, 54, 1),
                         prefixIcon: Icon(
                           isHelping
                               ? FontAwesomeIcons.handHoldingHeart

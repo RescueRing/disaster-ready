@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_const, prefer_const_constructors
 
+import 'package:disaster_ready/generated/l10n.dart';
 import 'package:disaster_ready/widgets/select_contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -47,8 +48,9 @@ class _AddEmergencyNumberState extends State<AddEmergencyNumber> {
             child: Column(
               children: [
                 Text(
-                  'We prioritize your well-being. Save your emergency number for enhanced support.',
+                  S.of(context).editNumberDescription,
                   style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
                 ),
                 SizedBox(height: 16.0),
                 GestureDetector(
@@ -64,8 +66,8 @@ class _AddEmergencyNumberState extends State<AddEmergencyNumber> {
                     ),
                     child: Center(
                       child: ListTile(
-                        title: const Text(
-                          'Select Contact',
+                        title: Text(
+                          S.of(context).add,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,

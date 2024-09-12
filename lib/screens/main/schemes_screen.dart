@@ -1,4 +1,5 @@
 import 'package:disaster_ready/data/schemes_data.dart';
+import 'package:disaster_ready/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -8,6 +9,10 @@ class SchemesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Locale currentLocale = Localizations.localeOf(context);
+    String languageCode = currentLocale.languageCode;
+    final multilanguage = S.of(context);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -35,7 +40,8 @@ class SchemesScreen extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Text(
-                              schemes[index]['schemeName']!.toString(),
+                              schemes[languageCode]![index]['schemeName']!
+                                  .toString(),
                               style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
@@ -49,41 +55,45 @@ class SchemesScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             const SizedBox(height: 10),
-                            Text(schemes[index]['objective']!.toString()),
+                            Text(schemes[languageCode]![index]['objective']!
+                                .toString()),
                             const SizedBox(height: 10),
-                            Text('Target Beneficiaries',
+                            Text(multilanguage.targetBeneficiaries,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold)),
                             Text(
-                              (schemes[index]['coverage']
+                              (schemes[languageCode]![index]['coverage']
                                       as Map<String, dynamic>)["whoItHelps"]!
                                   .toString(),
                             ),
                             const SizedBox(height: 10),
-                            Text('Provided Benefits',
+                            Text(multilanguage.providedBenifits,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold)),
                             // const SizedBox(height: 10),
                             Text(
-                              (schemes[index]['coverage']
+                              (schemes[languageCode]![index]['coverage']
                                       as Map<String, dynamic>)["whatItOffers"]!
                                   .toString(),
                             ),
                             const SizedBox(height: 10),
-                            Text('How to access:',
+                            Text(multilanguage.howToAccess,
                                 style: const TextStyle(
                                     fontSize: 16, fontWeight: FontWeight.bold)),
                             for (int i = 0;
                                 i <
-                                    (schemes[index]['howToAccess'] as List)
+                                    (schemes[languageCode]![index]
+                                            ['howToAccess'] as List)
                                         .length;
                                 i++)
                               Text(
-                                  '${i + 1}. ${(schemes[index]['howToAccess'] as List)[i]}'
+                                  '${i + 1}. ${(schemes[languageCode]![index]['howToAccess'] as List)[i]}'
                                       .toString()),
                             const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            Wrap(
+                              // child: Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceEvenly,
                               children: [
                                 ElevatedButton.icon(
                                     icon: const Icon(
@@ -96,21 +106,23 @@ class SchemesScreen extends StatelessWidget {
                                     ),
                                     onPressed: () {
                                       HapticFeedback.lightImpact();
-                                      launchUrl(Uri.parse((schemes[index]
-                                                      ['contactInformation']
-                                                  as Map<String, dynamic>)[
-                                              'website']!
-                                          .toString()));
+                                      launchUrl(Uri.parse(
+                                          (schemes[languageCode]![index]
+                                                          ['contactInformation']
+                                                      as Map<String, dynamic>)[
+                                                  'website']!
+                                              .toString()));
                                     },
                                     label: Padding(
                                       padding: const EdgeInsets.all(0),
-                                      child: Text('Visit Website',
+                                      child: Text(multilanguage.visitWebsite,
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontSize: 10)),
                                     )),
                                 const SizedBox(width: 4),
-                                if ((schemes[index]['contactInformation']
+                                if ((schemes[languageCode]![index]
+                                                ['contactInformation']
                                             as Map<String, dynamic>)['helpline']
                                         .toString()
                                         .length <
@@ -128,12 +140,13 @@ class SchemesScreen extends StatelessWidget {
                                     onPressed: () {
                                       HapticFeedback.lightImpact();
                                       launchUrl(Uri.parse(
-                                          'tel:${(schemes[index]['contactInformation'] as Map<String, dynamic>)['helpline'].toString()}'));
+                                          'tel:${(schemes[languageCode]![index]['contactInformation'] as Map<String, dynamic>)['helpline'].toString()}'));
                                     },
                                     label: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
-                                        (schemes[index]['contactInformation']
+                                        (schemes[languageCode]![index]
+                                                        ['contactInformation']
                                                     as Map<String, dynamic>)[
                                                 'helpline']
                                             .toString(),
@@ -142,7 +155,8 @@ class SchemesScreen extends StatelessWidget {
                                     ),
                                   ),
                               ],
-                            )
+                            ),
+                            // )
                           ],
                         ),
                       ),

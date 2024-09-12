@@ -22,7 +22,10 @@ class _GetPermissionsState extends State<FetchPermissions> {
     if (locationPermissionGranted && smsPermissionGranted) {
       await prefs.setBool('permissionsGranted', true);
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => HomeScreen()),
+        MaterialPageRoute(
+            builder: (context) => HomeScreen(
+                  context: context,
+                )),
       );
     }
   }
