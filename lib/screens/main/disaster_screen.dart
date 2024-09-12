@@ -15,8 +15,7 @@ class DisasterScreen extends StatefulWidget {
 }
 
 class _DisasterScreenState extends State<DisasterScreen> {
-  // int selectedIndex = 4;
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   void _scrollToTop() {
     _scrollController.animateTo(
       250,
@@ -25,16 +24,6 @@ class _DisasterScreenState extends State<DisasterScreen> {
     );
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   widget.addListener(() {
-  //     if (widget.selectedIndex != 0) {
-  //       _scrollToTop();
-  //     }
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +31,6 @@ class _DisasterScreenState extends State<DisasterScreen> {
         padding: const EdgeInsets.all(0.0),
         child: SingleChildScrollView(
           controller: _scrollController,
-          // reverse: true,
           child: Column(
             children: [
               Container(
@@ -61,7 +49,6 @@ class _DisasterScreenState extends State<DisasterScreen> {
                         _scrollToTop();
                       },
                       child: Container(
-                        // height: 200,
                         padding:
                             const EdgeInsets.only(top: 4, left: 5, right: 5),
                         child: Card(
@@ -102,10 +89,11 @@ class _DisasterScreenState extends State<DisasterScreen> {
                                   ),
                                   SizedBox(height: 10),
                                   Text(
-                                      '${disasterData[index]['disaster_name']}',
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18)),
+                                    '${disasterData[index]['disaster_name']}',
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18),
+                                  ),
                                 ],
                               ),
                             ),
@@ -163,9 +151,8 @@ class _DisasterScreenState extends State<DisasterScreen> {
                                 "tel:${(disasterData[widget.selectedIndex]['emergency_contact'] as Map<String, dynamic>)['phone']}"));
                           },
                           label: Text((disasterData[widget.selectedIndex]
-                                          ['emergency_contact']
-                                      as Map<String, dynamic>)['number']
-                                  .toString() ??
+                                      ['emergency_contact']
+                                  as Map<String, dynamic>)['number'] ??
                               'Call'),
                           icon: Icon(Icons.call)),
                       SizedBox(height: 10),

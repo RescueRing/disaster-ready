@@ -72,3 +72,4 @@ lib/firebase_options.dart
 .env
 lib/screens/temp_home.dart
 android/app/src/main/AndroidManifest.xml
+lib/data/hospital_location.json

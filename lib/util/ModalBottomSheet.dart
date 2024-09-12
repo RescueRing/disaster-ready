@@ -54,7 +54,6 @@ void ModelBottomSheet(
                     SizedBox(
                       height: 10,
                     ),
-                    // if (isHelping)
                     Expanded(
                       child: ListView.builder(
                         itemCount: helpingOptions.length,
@@ -98,50 +97,6 @@ void ModelBottomSheet(
                         },
                       ),
                     ),
-                    // if (!isHelping)
-                    //   Expanded(
-                    //     child: ListView.builder(
-                    //       itemCount: helpingOptions.length,
-                    //       itemBuilder: (context, index) {
-                    //         return Card(
-                    //           shape: RoundedRectangleBorder(
-                    //               borderRadius: BorderRadius.circular(20),
-                    //               side: BorderSide(
-                    //                   color: Colors.blue.shade300, width: 2)),
-                    //           child: ListTile(
-                    //             tileColor:
-                    //                 selectedHS.contains(helpingOptions[index])
-                    //                     ? Colors.blue.shade300
-                    //                     : null,
-                    //             onTap: () {
-                    //               if (selectedHS
-                    //                   .contains(helpingOptions[index])) {
-                    //                 setState(() {
-                    //                   selectedHS.remove(helpingOptions[index]);
-                    //                 });
-                    //               } else {
-                    //                 setState(() {
-                    //                   selectedHS.add(helpingOptions[index]);
-                    //                 });
-                    //               }
-                    //               setState(() {});
-                    //             },
-                    //             leading: Icon(
-                    //               helpIcons[helpingOptions[index]],
-                    //               color: !selectedHS
-                    //                       .contains(helpingOptions[index])
-                    //                   ? Colors.blue
-                    //                   : Colors.white,
-                    //             ),
-                    //             title: Text(
-                    //               helpingOptions[index],
-                    //               style: const TextStyle(fontSize: 18),
-                    //             ),
-                    //           ),
-                    //         );
-                    //       },
-                    //     ),
-                    //   ),
                     if (selectedHS.isNotEmpty)
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
