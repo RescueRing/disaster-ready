@@ -978,6 +978,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.0"
+  text_responsive:
+    dependency: "direct main"
+    description:
+      name: text_responsive
+      sha256: "0d0e6685d19dffd38fe4a45522245b3a344e0d4302ba96c779ff32b9f96b22d4"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.1"
   toggle_switch:
     dependency: "direct main"
     description:

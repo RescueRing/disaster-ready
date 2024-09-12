@@ -50,6 +50,7 @@ dependencies:
   intl_utils: ^2.8.7
   provider: ^6.1.2
   skeletonizer: ^1.4.2
+  text_responsive: ^1.2.1
 
 dev_dependencies:
   intl_translation: ^0.20.0

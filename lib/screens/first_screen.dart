@@ -4,6 +4,7 @@ import 'package:disaster_ready/screens/main/add_emergency_number.dart';
 import 'package:disaster_ready/screens/main/disaster_screen.dart';
 import 'package:disaster_ready/screens/main/home_screen.dart';
 import 'package:disaster_ready/screens/main/schemes_screen.dart';
+import 'package:disaster_ready/util/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -36,17 +37,16 @@ class _FirstScreenState extends State<FirstScreen> {
     });
   }
 
-  List<Widget> screens = [
-    HomeScreen(),
-    const AddEmergencyNumber(),
-    SchemesScreen(),
-    DisasterScreen(),
-    Container()
-  ];
-
   int index = 3;
   @override
   Widget build(BuildContext context) {
+    List<Widget> screens = [
+      HomeScreen(context: context),
+      const AddEmergencyNumber(),
+      SchemesScreen(),
+      DisasterScreen(),
+      Container()
+    ];
     final localization = S.of(context);
 
     List<String> titles = [
@@ -81,7 +81,7 @@ class _FirstScreenState extends State<FirstScreen> {
                               top: 5,
                               left: 70,
                               child: Text(
-                                'Rescue Ring',
+                                localization.rescuering,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 16,
@@ -92,7 +92,7 @@ class _FirstScreenState extends State<FirstScreen> {
                               bottom: 5,
                               left: 10,
                               child: Text(
-                                'A network of support for those in need',
+                                localization.rescuedescription,
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 12,
@@ -132,7 +132,18 @@ class _FirstScreenState extends State<FirstScreen> {
                 ),
               ),
               appBar: AppBar(
-                title: Text(titles[index]),
+                title: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(
+                    titles[index],
+                    softWrap: true,
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 backgroundColor: Colors.transparent,
                 actions: [
                   IconButton(
@@ -141,7 +152,7 @@ class _FirstScreenState extends State<FirstScreen> {
 
                         SharedPreferences.getInstance().then((prefs) {
                           String newLocale =
-                              prefs.getString('locale') == 'en' ? 'kan' : 'en';
+                              prefs.getString('locale') == 'en' ? 'kn' : 'en';
                           prefs.setString('locale', newLocale);
                           Locale newLocaleObj = Locale(newLocale);
                           // LocaleProvider(newLocaleObj).setLocale(newLocaleObj);
@@ -157,7 +168,7 @@ class _FirstScreenState extends State<FirstScreen> {
                         // });
                         // LocaleProvider(Locale('es')).setLocale(Locale('es'));
                       },
-                      icon: Icon(Icons.language))
+                      icon: Icon(Icons.language)),
                   // IconButton(
                   //   icon: const Icon(Icons.delete),
                   //   onPressed: () {

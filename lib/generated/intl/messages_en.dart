@@ -22,16 +22,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "Preparedness": MessageLookupByLibrary.simpleMessage("Preparedness"),
+        "add": MessageLookupByLibrary.simpleMessage("Add"),
+        "call": MessageLookupByLibrary.simpleMessage("Call"),
         "clothing": MessageLookupByLibrary.simpleMessage("Clothing"),
+        "consequences": MessageLookupByLibrary.simpleMessage("Consequences"),
         "cyclone": MessageLookupByLibrary.simpleMessage("Cyclone"),
         "disaster": MessageLookupByLibrary.simpleMessage("Disaster"),
         "donate": MessageLookupByLibrary.simpleMessage("Donate"),
+        "done": MessageLookupByLibrary.simpleMessage("Done"),
         "drought": MessageLookupByLibrary.simpleMessage("Drought"),
         "earthquake": MessageLookupByLibrary.simpleMessage("Earthquake"),
         "editEmergencyNumber":
             MessageLookupByLibrary.simpleMessage("Edit Emergency Number"),
         "editNumberDescription": MessageLookupByLibrary.simpleMessage(
             "We prioritize your well-being. Save your emergency number for enhanced support."),
+        "emergencyContact":
+            MessageLookupByLibrary.simpleMessage("Emergency Contact"),
         "fire": MessageLookupByLibrary.simpleMessage("Fire"),
         "flood": MessageLookupByLibrary.simpleMessage("Flood"),
         "food": MessageLookupByLibrary.simpleMessage("Food"),
@@ -39,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Government Schemes"),
         "hello": MessageLookupByLibrary.simpleMessage("Hello"),
         "helping": MessageLookupByLibrary.simpleMessage("Helping"),
+        "howToAccess": MessageLookupByLibrary.simpleMessage("How to Access"),
         "hurricane": MessageLookupByLibrary.simpleMessage("Hurricane"),
         "landslide": MessageLookupByLibrary.simpleMessage("Landslide"),
         "medical": MessageLookupByLibrary.simpleMessage("Medical"),
@@ -49,12 +57,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Provide Medical"),
         "provideShelter":
             MessageLookupByLibrary.simpleMessage("Provide Shelter"),
+        "providedBenifits":
+            MessageLookupByLibrary.simpleMessage("Provided Benefits"),
+        "rescuedescription": MessageLookupByLibrary.simpleMessage(
+            "A network of support for those in need"),
         "rescuering": MessageLookupByLibrary.simpleMessage("Rescue Ring"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "seekHelp": MessageLookupByLibrary.simpleMessage("Seeking Help"),
         "selectContact": MessageLookupByLibrary.simpleMessage("Select Contact"),
         "shelter": MessageLookupByLibrary.simpleMessage("Shelter"),
+        "targetBeneficiaries":
+            MessageLookupByLibrary.simpleMessage("Target Beneficiaries"),
         "tornado": MessageLookupByLibrary.simpleMessage("Tornado"),
         "tsunami": MessageLookupByLibrary.simpleMessage("Tsunami"),
+        "visitWebsite": MessageLookupByLibrary.simpleMessage("Visit Website"),
+        "volcanicEruption": MessageLookupByLibrary.simpleMessage("Eruption"),
         "volcano": MessageLookupByLibrary.simpleMessage("Volcano"),
         "volunteer": MessageLookupByLibrary.simpleMessage("Volunteer"),
         "welcome":

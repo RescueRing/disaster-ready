@@ -1,12 +1,13 @@
 {
-  "@@locale": "kan",
+  "@@locale": "kn",
   "hello": "ಹಲೋ",
   "welcome": "ನಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ಗೆ ಸ್ವಾಗತ",
   "disaster": "ಆಪತ್ಕಾಲ",
   "rescuering": "ರೆಸ್ಕ್ಯೂ ರಿಂಗ್",
+  "rescuedescription": "ಬೇಡಿಕೆಯಲ್ಲಿರುವವರಿಗಾಗಿ ಬೆಂಬಲದ ನೆಟ್ವರ್ಕ್",
   "editEmergencyNumber": "ಆಪಾತಕಾಲದ ಸಂಖ್ಯೆಯನ್ನು ಸಂಪಾದಿಸಿ",
   "govSchemes": "ಸರ್ಕಾರದ ಯೋಜನೆಗಳು",
-  "helping": "ಸಹಾಯಮಾಡುತ್ತಿದ್ದಾರೆ",
+  "helping": "ಸಹಾಯ ಮಾಡುತ್ತಿದ್ದೇನೆ",
   "needHelp": "ಸಹಾಯ ಬೇಕಾಗಿದೆ",
   "medical": "ವೈದ್ಯಕೀಯ",
   "food": "ಆಹಾರ",
@@ -31,5 +32,16 @@
   "volcano": "ಜ್ವಾಲಾಮುಖಿ",
   "tornado": "ಟಾರ್ನೇಡೋ",
   "hurricane": "ಹರಿಕೇನ್",
-  "wildfire": "ಕಾಡು ಬೆಂಕಿ"
+  "wildfire": "ಕಾಡು ಬೆಂಕಿ",
+  "save": "save",
+  "done": "done",
+  "add": "add",
+  "consequences": "ಪರಿಣಾಮಗಳು",
+  "Preparedness": "ಸಜ್ಜುಗೊಳಿಸುವುದು",
+  "emergencyContact": "ಆಪಾತಕಾಲದ ಸಂಪರ್ಕ",
+  "targetBeneficiaries": "ಲಕ್ಷ್ಯ ಲಾಭಾರ್ಥಿಗಳು",
+  "providedBenifits": "ಒದಗಿಸಿದ ಲಾಭಗಳು",
+  "howToAccess": "ಹೇಗೆ ಪ್ರವೇಶಿಸಬೇಕು",
+  "visitWebsite": "ವೆಬ್‌ಸೈಟ್ ಭೇಟಿಯಾಗಿ",
+  "volcanicEruption": "ಜ್ವಾಲಾಮುಖಿ"
 }
