@@ -1,0 +1,15 @@
+{
+  "@@last_modified": "2024-09-12T16:43:45.740324",
+  "hello": "Hello",
+  "@hello": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "Welcome to our app",
+  "@welcome": {
+    "description": "",
+    "type": "text",
+    "placeholders": {}
+  }
+}

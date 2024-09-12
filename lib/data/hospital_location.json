@@ -1,0 +1,367 @@
+{
+  "results": [
+    {
+      "fsq_id": "c277e0a493da4c4f5f7558d7",
+      "categories": [
+        {
+          "id": 15014,
+          "name": "Hospital",
+          "short_name": "Hospital",
+          "plural_name": "Hospitals",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/medical_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 239,
+      "geocodes": {
+        "main": {
+          "latitude": 13.006079,
+          "longitude": 77.538246
+        }
+      },
+      "link": "/v3/places/c277e0a493da4c4f5f7558d7",
+      "location": {
+        "address": "256 256, Nandini Lyt West Of Chord Road Nandini Lyt West Of Chord Road",
+        "country": "IN",
+        "formatted_address": "256 256, Nandini Lyt West Of Chord Road Nandini Lyt West Of Chord Road, Bangalore 560086, Karnātaka",
+        "locality": "Bangalore",
+        "postcode": "560086",
+        "region": "Karnātaka"
+      },
+      "name": "Modi Hospital",
+      "related_places": {},
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "fsq_id": "de9c7cb65ebf401060c5ab36",
+      "categories": [
+        {
+          "id": 12009,
+          "name": "Education",
+          "short_name": "Education",
+          "plural_name": "Education",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/school_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 243,
+      "geocodes": {
+        "main": {
+          "latitude": 13.006166,
+          "longitude": 77.538149
+        }
+      },
+      "link": "/v3/places/de9c7cb65ebf401060c5ab36",
+      "location": {
+        "address": "463 2nd Stage, West Of Chord Road",
+        "country": "IN",
+        "formatted_address": "463 2nd Stage, West Of Chord Road, Bangalore 560086, Karnātaka",
+        "locality": "Bangalore",
+        "postcode": "560086",
+        "region": "Karnātaka"
+      },
+      "name": "Vidya Bharathi English School",
+      "related_places": {},
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "fsq_id": "733ca7bf24094cbb52901a64",
+      "categories": [],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 243,
+      "geocodes": {
+        "main": {
+          "latitude": 13.006166,
+          "longitude": 77.538149
+        }
+      },
+      "link": "/v3/places/733ca7bf24094cbb52901a64",
+      "location": {
+        "address": "3 W O C Road, Phase-2, 2nd Stage",
+        "country": "IN",
+        "formatted_address": "3 W O C Road, Phase-2, 2nd Stage, Bangalore 560086, Karnātaka",
+        "locality": "Bangalore",
+        "postcode": "560086",
+        "region": "Karnātaka"
+      },
+      "name": "Basaveshwara Girls High School",
+      "related_places": {},
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "fsq_id": "4c29818ace3fc92805eb6e88",
+      "categories": [],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 400,
+      "geocodes": {
+        "main": {
+          "latitude": 13.00485,
+          "longitude": 77.540803
+        },
+        "roof": {
+          "latitude": 13.00485,
+          "longitude": 77.540803
+        }
+      },
+      "link": "/v3/places/4c29818ace3fc92805eb6e88",
+      "location": {
+        "country": "IN",
+        "cross_street": "",
+        "formatted_address": "Bangalore, Karnātaka",
+        "locality": "Bangalore",
+        "region": "Karnātaka"
+      },
+      "name": "Oxford school",
+      "related_places": {},
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "fsq_id": "2dc41ba09e794ace22d5a47b",
+      "categories": [
+        {
+          "id": 12009,
+          "name": "Education",
+          "short_name": "Education",
+          "plural_name": "Education",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/school_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 123,
+      "geocodes": {
+        "main": {
+          "latitude": 13.005231,
+          "longitude": 77.537556
+        }
+      },
+      "link": "/v3/places/2dc41ba09e794ace22d5a47b",
+      "location": {
+        "address": "No 21, 1st Main Road, Jc Nagar, Mahalakshmipuram",
+        "country": "IN",
+        "formatted_address": "No 21, 1st Main Road, Jc Nagar, Mahalakshmipuram, Bangalore 560086, Karnataka",
+        "locality": "Bangalore",
+        "postcode": "560086",
+        "region": "Karnataka"
+      },
+      "name": "New Oxford Public School",
+      "related_places": {}
+    },
+    {
+      "fsq_id": "00803c4de06e4709a236dc25",
+      "categories": [
+        {
+          "id": 12009,
+          "name": "Education",
+          "short_name": "Education",
+          "plural_name": "Education",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/school_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 142,
+      "geocodes": {
+        "main": {
+          "latitude": 13.003316,
+          "longitude": 77.536248
+        },
+        "roof": {
+          "latitude": 13.003316,
+          "longitude": 77.536248
+        }
+      },
+      "link": "/v3/places/00803c4de06e4709a236dc25",
+      "location": {
+        "address": "9th Main Road",
+        "country": "IN",
+        "formatted_address": "9th Main Road, Bangalore 560086, Karnataka",
+        "locality": "Bangalore",
+        "postcode": "560086",
+        "region": "Karnataka"
+      },
+      "name": "Canara Kannada Higher Primary School",
+      "related_places": {}
+    },
+    {
+      "fsq_id": "645b8025c6425c358f8dac73",
+      "categories": [
+        {
+          "id": 12059,
+          "name": "High School",
+          "short_name": "High School",
+          "plural_name": "High Schools",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/school_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 484,
+      "geocodes": {
+        "main": {
+          "latitude": 13.004381,
+          "longitude": 77.5417
+        }
+      },
+      "link": "/v3/places/645b8025c6425c358f8dac73",
+      "location": {
+        "country": "IN",
+        "cross_street": "",
+        "formatted_address": "Bangalore 560086, Karnātaka",
+        "locality": "Bangalore",
+        "postcode": "560086",
+        "region": "Karnātaka"
+      },
+      "name": "Jagajyothi Basveshwara High School",
+      "related_places": {},
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "fsq_id": "55d82126498e926c56d07353",
+      "categories": [
+        {
+          "id": 12009,
+          "name": "Education",
+          "short_name": "Education",
+          "plural_name": "Education",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/school_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 520,
+      "geocodes": {
+        "main": {
+          "latitude": 13.006571,
+          "longitude": 77.541384
+        },
+        "roof": {
+          "latitude": 13.006571,
+          "longitude": 77.541384
+        }
+      },
+      "link": "/v3/places/55d82126498e926c56d07353",
+      "location": {
+        "country": "IN",
+        "cross_street": "",
+        "formatted_address": "941735",
+        "postcode": "941735"
+      },
+      "name": "Mothers Public School",
+      "related_places": {},
+      "timezone": "Asia/Kolkata"
+    },
+    {
+      "fsq_id": "1c147fa66db1466e078e868a",
+      "categories": [
+        {
+          "id": 12009,
+          "name": "Education",
+          "short_name": "Education",
+          "plural_name": "Education",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/school_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 191,
+      "geocodes": {
+        "main": {
+          "latitude": 13.002573,
+          "longitude": 77.536555
+        },
+        "roof": {
+          "latitude": 13.002573,
+          "longitude": 77.536555
+        }
+      },
+      "link": "/v3/places/1c147fa66db1466e078e868a",
+      "location": {
+        "address": "10th Main Road",
+        "country": "IN",
+        "formatted_address": "10th Main Road, Bangalore 560086, Karnataka",
+        "locality": "Bangalore",
+        "postcode": "560086",
+        "region": "Karnataka"
+      },
+      "name": "Kanchika Vidya Mandir School",
+      "related_places": {}
+    },
+    {
+      "fsq_id": "92de387be0ed4cb5a038e18f",
+      "categories": [
+        {
+          "id": 12009,
+          "name": "Education",
+          "short_name": "Education",
+          "plural_name": "Education",
+          "icon": {
+            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/school_",
+            "suffix": ".png"
+          }
+        }
+      ],
+      "chains": [],
+      "closed_bucket": "LikelyOpen",
+      "distance": 534,
+      "geocodes": {
+        "main": {
+          "latitude": 13.000356,
+          "longitude": 77.53421
+        },
+        "roof": {
+          "latitude": 13.000356,
+          "longitude": 77.53421
+        }
+      },
+      "link": "/v3/places/92de387be0ed4cb5a038e18f",
+      "location": {
+        "address": "273 Sarada Colony",
+        "country": "IN",
+        "formatted_address": "273 Sarada Colony, Bangalore 560079, Karnātaka",
+        "locality": "Bangalore",
+        "postcode": "560079",
+        "region": "Karnātaka"
+      },
+      "name": "V L S Vidyanagar Kannada Higher Primary School",
+      "related_places": {},
+      "timezone": "Asia/Kolkata"
+    }
+  ],
+  "context": {
+    "geo_bounds": {
+      "circle": {
+        "center": {
+          "latitude": 13.0041669,
+          "longitude": 77.5372268
+        },
+        "radius": 1000
+      }
+    }
+  }
+}

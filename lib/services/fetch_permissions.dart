@@ -1,12 +1,13 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:disaster_ready/screens/main/home_screen.dart';
+import 'package:disaster_ready/util/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FetchPermissions extends StatefulWidget {
-  FetchPermissions({super.key});
+  const FetchPermissions({super.key});
 
   @override
   _GetPermissionsState createState() => _GetPermissionsState();
@@ -66,17 +67,6 @@ class _GetPermissionsState extends State<FetchPermissions> {
                   }),
                 ),
               ),
-              // SizedBox(height: 10),
-              // PermissionRequestTile(
-              //   permission: Permission.sms,
-              //   title: 'SMS Permission',
-              //   description:
-              //       'We use SMS as an API to communicate with our servers in case of no internet, ensuring the app remains functional.',
-              //   isGranted: smsPermissionGranted,
-              //   onGranted: () => setState(() {
-              //     smsPermissionGranted = true;
-              //   }),
-              // ),
               SizedBox(height: 20),
               SizedBox(
                 height: 50,
@@ -125,9 +115,7 @@ class PermissionRequestTile extends StatelessWidget {
     if (status.isGranted) {
       onGranted();
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text('Permission Denied'),
-      ));
+      snack("Permission denied", context, color: Colors.red);
     }
   }
 

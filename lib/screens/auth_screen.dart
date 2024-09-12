@@ -131,30 +131,32 @@ class _AuthScreenState extends State<AuthScreen> {
           signInWithGoogle();
         },
         child: Container(
-          margin: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            backgroundBlendMode: BlendMode.darken,
-            color: Colors.blue.shade100,
-            borderRadius: BorderRadius.circular(30),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/google_icon.png',
-                height: 50,
-                width: 50,
-              ),
-              const Text(
-                "Continue with Google",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ),
+            margin: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              backgroundBlendMode: BlendMode.darken,
+              color: Colors.blue.shade100,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (!authing)
+                  Image.asset(
+                    'assets/images/google_icon.png',
+                    height: 50,
+                    width: 50,
+                  ),
+                if (!authing)
+                  const Text(
+                    "Continue with Google",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                if (authing) CircularProgressIndicator()
+              ],
+            )),
       ),
       body: Container(
         decoration: BoxDecoration(
@@ -170,67 +172,35 @@ class _AuthScreenState extends State<AuthScreen> {
         child: Column(
           children: [
             Spacer(),
-            const Gap(600),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text('Rescue Ring',
+            Positioned(
+              bottom: 1000,
+              top: 200,
+              right: 0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('Rescue Ring',
+                          style: GoogleFonts.exo2(
+                            color: Colors.black,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          )),
+                      Text(
+                        'A network of support for those in need....',
                         style: GoogleFonts.exo2(
                           color: Colors.black,
-                          fontSize: 24,
+                          fontSize: 16,
                           fontWeight: FontWeight.bold,
-                        )),
-                    Text(
-                      'A network of support for those in need....',
-                      // textAlign: TextAlign.center,
-                      style: GoogleFonts.exo2(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-            const Spacer(),
-            // GestureDetector(
-            //   onTap: () {
-            //     signInWithGoogle();
-            //   },
-            //   child: !authing
-            //       ? Container(
-            //           height: 40,
-            //           width: double.infinity,
-            //           decoration: BoxDecoration(
-            //               color: Colors.white,
-            //               borderRadius: BorderRadius.circular(30)),
-            //           child: Row(
-            //             mainAxisAlignment: MainAxisAlignment.center,
-            //             children: [
-            //               Image.asset(
-            //                 'assets/images/google_icon.png',
-            //                 height: 50,
-            //                 width: 50,
-            //               ),
-            //               const Text(
-            //                 "Continue with Google",
-            //                 style: TextStyle(
-            //                   color: Colors.black,
-            //                   fontWeight: FontWeight.bold,
-            //                 ),
-            //               ),
-            //             ],
-            //           ),
-            //         )
-            //       : const Center(
-            //           child: CircularProgressIndicator(),
-            //         ),
-            // ),
-            const Spacer(),
           ],
         ),
       ),

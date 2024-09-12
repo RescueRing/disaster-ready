@@ -91,15 +91,8 @@ class SchemesScreen extends StatelessWidget {
                                       color: Colors.white,
                                     ),
                                     style: ButtonStyle(
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                              Colors.blue.shade800),
-                                      // side: MaterialStateProperty.all(
-                                      // BorderSide(
-                                      //   color: Colors.blue,
-                                      //   width: 1.5,
-                                      // ),
-                                      // ),
+                                      backgroundColor: WidgetStateProperty.all(
+                                          Colors.blue.shade800),
                                     ),
                                     onPressed: () {
                                       HapticFeedback.lightImpact();
@@ -125,7 +118,7 @@ class SchemesScreen extends StatelessWidget {
                                   ElevatedButton.icon(
                                     icon: const Icon(Icons.phone),
                                     style: ButtonStyle(
-                                      side: MaterialStateProperty.all(
+                                      side: WidgetStateProperty.all(
                                         BorderSide(
                                           color: Colors.lightBlue.shade100,
                                           width: 1.5,

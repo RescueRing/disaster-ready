@@ -1,28 +1,26 @@
-// import 'dart:math';
+import 'package:disaster_ready/providers/locale_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// import 'package:disaster_ready/screens/add_emergency_number.dart';
 import 'package:disaster_ready/screens/auth_screen.dart';
 import 'package:disaster_ready/screens/first_screen.dart';
-// import 'package:disaster_ready/screens/home_screen.dart';
-// import 'package:disaster_ready/widgets/fetch_permissions.dart';
 import 'package:disaster_ready/widgets/phone_number.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:disaster_ready/generated/l10n.dart';
 import 'firebase_options.dart';
+import 'package:provider/provider.dart' as prv;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await dotenv.load(fileName: ".env");
   } catch (e) {
-    print("Error loading .env file: $e");
+    print(e);
   }
   final prefs = await SharedPreferences.getInstance();
   var authed = prefs.getBool('authed');
@@ -31,16 +29,27 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(ProviderScope(
-    child: MyApp(
-        authed: authed ?? false,
-        phoneNumber: phoneNumber ?? '',
-        permissionGiven: permissionsGiven),
+  runApp(prv.ChangeNotifierProvider(
+    create: (context) {
+      final localeProvider = LocaleProvider(Locale('en'));
+      if (prefs.getString('locale') != null) {
+        localeProvider.setLocale(const Locale('en'));
+      } else {
+        localeProvider.setLocale(const Locale('en'));
+      }
+      return localeProvider;
+    },
+    child: ProviderScope(
+      child: MyApp(
+          authed: authed ?? false,
+          phoneNumber: phoneNumber ?? '',
+          permissionGiven: permissionsGiven),
+    ),
   ));
 }
 
 class MyApp extends StatefulWidget {
-  MyApp(
+  const MyApp(
       {super.key,
       required this.authed,
       required this.phoneNumber,
@@ -68,17 +77,22 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    setPrefs();
   }
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final localeProvider = prv.Provider.of<LocaleProvider>(context);
     return MaterialApp(
+      locale: localeProvider.locale,
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       title: 'Disaster Ready',
-      // theme: ThemeData(
-      //   primarySwatch: Colors.blue,
-      //   textTheme: GoogleFonts.exo2TextTheme(),
-      // ),
       theme: FlexThemeData.light(
         colors: const FlexSchemeColor(
           primary: Color(0xff004881),
@@ -103,9 +117,10 @@ class _MyAppState extends State<MyApp> {
         visualDensity: FlexColorScheme.comfortablePlatformDensity,
         useMaterial3: true,
         swapLegacyOnMaterial3: true,
-      ).copyWith(
-        textTheme: GoogleFonts.exo2TextTheme(),
       ),
+      // .copyWith(
+      //   textTheme: GoogleFonts.exo2TextTheme(),
+      // ),
       darkTheme: ThemeData(
         primarySwatch: Colors.blue,
       ),
