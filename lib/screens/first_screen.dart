@@ -4,8 +4,12 @@ import 'package:disaster_ready/screens/main/add_emergency_number.dart';
 import 'package:disaster_ready/screens/main/disaster_screen.dart';
 import 'package:disaster_ready/screens/main/home_screen.dart';
 import 'package:disaster_ready/screens/main/schemes_screen.dart';
-import 'package:disaster_ready/util/helper_functions.dart';
+import 'package:disaster_ready/screens/volunteer/dashboard/volunteer_dashboard.dart';
+import 'package:disaster_ready/screens/volunteer/registering/volunteer_first_screen.dart';
+import 'package:disaster_ready/screens/volunteer/registering/volunteer_intro.dart';
+// import 'package:disaster_ready/util/helper_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:provider/provider.dart' as prv;
@@ -20,10 +24,21 @@ class FirstScreen extends StatefulWidget {
 
 class _FirstScreenState extends State<FirstScreen> {
   bool isLoading = true;
+  // SharedPreferences? prefs;
+  bool isVolunteer = false;
+
   @override
   void initState() {
     super.initState();
+    // prefs = SharedPreferences.getInstance();
     SharedPreferences.getInstance().then((prefs) {
+      if (prefs.getBool('isVolunteer') == null) {
+        prefs.setBool('isVolunteer', false);
+      } else {
+        setState(() {
+          isVolunteer = prefs.getBool('isVolunteer')!;
+        });
+      }
       if (prefs.getInt('screenIndex') != null) {
         setState(() {
           index = prefs.getInt('screenIndex')!;
@@ -148,25 +163,29 @@ class _FirstScreenState extends State<FirstScreen> {
                 actions: [
                   IconButton(
                       onPressed: () {
-                        print('Language changed');
-
+                        if (isVolunteer) {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => VolunteerDashboard()));
+                        } else {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) =>
+                                  VolunteerRegistrationApp()));
+                        }
+                      },
+                      icon: Icon(FontAwesomeIcons.crown)),
+                  IconButton(
+                      onPressed: () {
                         SharedPreferences.getInstance().then((prefs) {
                           String newLocale =
                               prefs.getString('locale') == 'en' ? 'kn' : 'en';
                           prefs.setString('locale', newLocale);
                           Locale newLocaleObj = Locale(newLocale);
-                          // LocaleProvider(newLocaleObj).setLocale(newLocaleObj);
                           prv.Provider.of<LocaleProvider>(context,
                                   listen: false)
                               .setLocale(newLocaleObj);
-                          // setState(() {
-                          //   // Rebuild the widget with the new locale
-                          // });
                         });
 
                         print(S.of(context).hello);
-                        // });
-                        // LocaleProvider(Locale('es')).setLocale(Locale('es'));
                       },
                       icon: Icon(Icons.language)),
                   // IconButton(

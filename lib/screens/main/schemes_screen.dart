@@ -17,7 +17,7 @@ class SchemesScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
-          itemCount: schemes.length,
+          itemCount: schemes[languageCode]!.length,
           itemBuilder: (context, index) {
             return Container(
               color: Colors.blue.withOpacity(0.1),

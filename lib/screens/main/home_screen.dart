@@ -29,39 +29,24 @@ class _HomeScreenState extends State<HomeScreen> {
   var multiLanguage;
   bool isHelping = false;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   multiLanguage = S.of(widget.context);
-  //   // Rest of the code...
-  // }
-
   String name = '';
   String email = '';
   List<String> filters = [];
 
-  // @override
-  // void initState() {
-  //   super.initState();
-
-  //   // Rest of the code...
-  // }
-
-  List<String>? helpingOptions;
-  // [
-  //   'Volunteer',
-  //   'Donate',
-  //   'Provide Shelter',
-  //   'Food',
-  //   'Medical'
-  // ];
+  List<String>? helpingOptions = [
+    'volunteer',
+    'donate',
+    'provideShelter',
+    'food',
+    'medical'
+  ];
 
   List<String> seekingOptions = [
-    'Medical',
-    'Food',
-    'Shelter',
-    'Clothing',
-    'Other'
+    'medical',
+    'food',
+    'shelter',
+    'clothing',
+    'other'
   ];
   bool locationLoaded = false;
   late LatLng? currentLocation = LatLng(0, 0);
@@ -82,40 +67,31 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     initPrefs();
     filters = [S.of(widget.context).helping, S.of(widget.context).seekHelp];
-    helpingOptions = [
-      S.of(widget.context).volunteer,
-      S.of(widget.context).donate,
-      S.of(widget.context).provideShelter,
-      S.of(widget.context).food,
-      S.of(widget.context).medical
-    ];
-    seekingOptions = [
-      S.of(widget.context).medical,
-      S.of(widget.context).food,
-      S.of(widget.context).shelter,
-      S.of(widget.context).clothing,
-      S.of(widget.context).other
-    ];
     getCurrentLocation();
     setupMarkerListener();
   }
 
 // Display the marker details in a dialog box when users click on a marker
   void displayInfo(MarkerDetails markerDetails) {
+    final Map<String, String> translationMap = {
+      'volunteer': S.of(context).volunteer,
+      'donate': S.of(context).donate,
+      'provideShelter': S.of(context).provideShelter,
+      'food': S.of(context).food,
+      'medical': S.of(context).medical,
+      // 'medical': S.of(context).medical,
+      // 'food': S.of(context).food,
+      'shelter': S.of(context).shelter,
+      'clothing': S.of(context).clothing,
+      'other': S.of(context).other,
+    };
     showDialog(
       useSafeArea: true,
       context: context,
       builder: (context) {
         return AlertDialog(
           title: ParagraphTextWidget(
-            markerDetails.selectedFilter[0],
-            // softWrap: true,
-            // style: TextStyle(
-            //   fontSize: 12.0,
-            //   overflow: TextOverflow.visible,
-            // ),
-            // overflow: TextOverflow.visible
-            // markerDetails.name,
+            translationMap[markerDetails.selectedFilter[0]]!,
           ),
           actions: [
             if (markerDetails.email == email)
@@ -129,7 +105,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ElevatedButton(onPressed: () {}, child: Text("Remove Marker")),
             ElevatedButton.icon(
               onPressed: () {},
-              label: Text(S.of(context).seekHelp),
+              label: Text(
+                S.of(context).seekHelp,
+              ),
               icon: Icon(Icons.call),
             ),
           ],
@@ -176,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
         .snapshots()
         .listen((snapshot) {
       if (snapshot.exists) {
-        List<dynamic> rawData = snapshot.data()!['location'];
+        List<dynamic> rawData = snapshot.data()!['help'];
         List<Map<String, dynamic>> data = rawData.cast<Map<String, dynamic>>();
         updateMarkers(data);
       }
@@ -197,21 +175,27 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
 // send the user's location and details to firebase
-  void sendToFire(location, isHelping, selectedFilter) async {
+  void sendToFire(
+    location, {
+    bool? isHelping,
+    List? selectedFilter,
+    String? additionalInfo,
+  }) async {
     var phone = await SharedPreferences.getInstance()
         .then((value) => value.getString('phoneNumber'));
     FirebaseFirestore.instance.collection('main').doc('locations').update({
-      'location': FieldValue.arrayUnion([
-        {
-          'latitude': location.latitude.toString(),
-          'longitude': location.longitude.toString(),
-          'isHelping': isHelping,
-          'selectedFilter': selectedFilter,
-          'phone': phone,
-          'email': email,
-          'name': name,
-        }
-      ])
+      if (selectedFilter != null)
+        'help': FieldValue.arrayUnion([
+          {
+            'latitude': location.latitude.toString(),
+            'longitude': location.longitude.toString(),
+            'isHelping': isHelping,
+            'selectedFilter': selectedFilter,
+            'phone': phone,
+            'email': email,
+            'name': name,
+          }
+        ])
     });
   }
 
@@ -273,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ModelBottomSheet(
           context,
           isHelping,
-          isHelping ? helpingOptions! : seekingOptions!,
+          isHelping ? helpingOptions! : seekingOptions,
           helpIcons,
           sendToFire,
           currentLocation,
@@ -303,14 +287,31 @@ class _HomeScreenState extends State<HomeScreen> {
           initialLabelIndex: isHelping ? 0 : 1,
           minWidth: 100.0,
           cornerRadius: 20.0,
-          activeBgColor: const [Colors.blue],
+          activeBgColor: const [Colors.blue, Color.fromARGB(255, 0, 47, 67)],
+          multiLineText: true,
+          centerText: true,
+          customTextStyles: const [
+            TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              overflow: TextOverflow.clip,
+            ),
+            TextStyle(
+              fontSize: 16,
+              color: Colors.white,
+              overflow: TextOverflow.clip,
+            ),
+          ],
+          curve: Curves.easeInOut,
           borderWidth: 2.0,
-          minHeight: 55,
+          minHeight: 70,
           customWidths: const [200.0, 200.0],
           activeFgColor: Colors.white,
           inactiveBgColor: Colors.grey,
           inactiveFgColor: Colors.white,
           fontSize: 16,
+          animate: true,
+          animationDuration: 200,
           labels: filters,
           onToggle: (index) {
             setState(() {
@@ -323,14 +324,110 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           locationLoaded
               ? GoogleMap(
+                  // liteModeEnabled: true,
+                  buildingsEnabled: true,
                   myLocationEnabled: true,
                   myLocationButtonEnabled: false,
-                  compassEnabled: false,
-                  mapToolbarEnabled: false,
+
+                  // compassEnabled: true,
+                  // circles: <Circle>{
+                  //   Circle(
+                  //     circleId: CircleId('currentLocation'),
+                  //     center: currentLocation!,
+                  //     radius: 100,
+                  //     fillColor: Colors.blue.withOpacity(0.1),
+                  //     strokeWidth: 1,
+                  //     strokeColor: const Color.fromARGB(100, 33, 149, 243),
+                  //   )
+                  // },
+                  // mapToolbarEnabled: false,
                   onMapCreated: _onMapCreated,
+                  // cloudMapId: 'c2088f572a4a96dd',
                   initialCameraPosition: currentPosition!,
                   onCameraMove: (position) => currentPosition = position,
                   zoomControlsEnabled: false,
+
+                  // style: '3183c41a36f5be0b',
+                  // polygons: <Polygon>{
+                  //   Polygon(
+                  //     polygonId: PolygonId('polygon'),
+                  //     onTap: () {
+                  //       print('This is a polygon');
+                  //       snack(
+                  //         'This is a polygon',
+                  //         context,
+                  //         color: Colors.blue,
+                  //         fontSize: 16,
+                  //         duration: 5,
+                  //       );
+                  //     },
+                  //     points: <LatLng>[
+                  //       LatLng(13.0041637, 77.5362149),
+                  //       LatLng(13.0031637, 77.5362149),
+                  //       LatLng(13.0041637, 77.5372249),
+                  //       LatLng(13.0041637, 77.531258),
+                  //     ],
+                  //     strokeWidth: 1,
+                  //     strokeColor: Colors.blue,
+                  //     fillColor: Colors.blue.withOpacity(0.1),
+                  //   ),
+                  // },
+                  heatmaps: <Heatmap>{
+                    // Heatmap(
+                    //   radius: HeatmapRadius.fromPixels(50),
+                    //   heatmapId: HeatmapId('heatmap'),
+                    //   gradient: HeatmapGradient(const [
+                    //     HeatmapGradientColor(Colors.yellow, 0.1),
+                    //     HeatmapGradientColor(
+                    //         Color.fromARGB(104, 244, 67, 54), 0.2),
+                    //   ]),
+                    //   data: const <WeightedLatLng>[
+                    //     WeightedLatLng(
+                    //       LatLng(13.0041637, 77.5362149),
+                    //       weight: 1.0,
+                    //     ),
+                    //     WeightedLatLng(
+                    //       LatLng(13.0031637, 77.5362149),
+                    //       weight: 1.0,
+                    //     ),
+                    //   ],
+                    // ),
+                    Heatmap(
+                      heatmapId: HeatmapId('heatmap'),
+                      opacity: 0.8,
+                      // dissipating: false,
+                      maximumZoomIntensity: 1,
+                      minimumZoomIntensity: 1,
+                      gradient: HeatmapGradient(const [
+                        HeatmapGradientColor(Colors.yellow, 0.1),
+                        HeatmapGradientColor(
+                            Color.fromARGB(104, 244, 67, 54), 0.2),
+                      ]),
+                      // maxIntensity: 5, .
+                      radius: HeatmapRadius.fromPixels(50),
+
+                      data: const <WeightedLatLng>[
+                        WeightedLatLng(
+                          LatLng(13.0041637, 77.5362149),
+                          weight: 1.0,
+                        ),
+                        WeightedLatLng(
+                          LatLng(13.0031637, 77.5362149),
+                          weight: 1.0,
+                        ),
+                        WeightedLatLng(
+                          LatLng(13.0041637, 77.5372249),
+                          weight: 1.0,
+                          // intensity: 1.0,
+                        ),
+                        WeightedLatLng(
+                          LatLng(13.0041637, 77.531258),
+                          weight: 1.0,
+                          // intensity: 1.0,
+                        ),
+                      ],
+                    ),
+                  },
                   markers: markersList.toSet(),
                 )
               : Center(child: CircularProgressIndicator()),
