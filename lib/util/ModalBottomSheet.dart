@@ -15,6 +15,37 @@ void ModelBottomSheet(
   Function sendToFire,
   LatLng currentLocation,
 ) {
+  final Map<String, String> translationMap = {
+    'volunteer': S.of(context).volunteer,
+    'donate': S.of(context).donate,
+    'provideShelter': S.of(context).provideShelter,
+    'food': S.of(context).food,
+    'medical': S.of(context).medical,
+    // 'medical': S.of(context).medical,
+    // 'food': S.of(context).food,
+    'shelter': S.of(context).shelter,
+    'clothing': S.of(context).clothing,
+    'other': S.of(context).other,
+  };
+  // String getTranslatedString(String key, BuildContext context) {
+
+  //   return S.of(context).$key;
+  // }
+  // helpingOptions = [
+  //   S.of(widget.context).volunteer,
+  //   S.of(widget.context).donate,
+  //   S.of(widget.context).provideShelter,
+  //   S.of(widget.context).food,
+  //   S.of(widget.context).medical
+  // ];
+  // seekingOptions = [
+  //   S.of(widget.context).medical,
+  //   S.of(widget.context).food,
+  //   S.of(widget.context).shelter,
+  //   S.of(widget.context).clothing,
+  //   S.of(widget.context).other
+  // ];
+
   showModalBottomSheet(
     isScrollControlled: true,
     shape: RoundedRectangleBorder(
@@ -92,7 +123,7 @@ void ModelBottomSheet(
                                         : Colors.white,
                               ),
                               title: Text(
-                                helpingOptions[index],
+                                translationMap[helpingOptions[index]]!,
                                 style: const TextStyle(fontSize: 18),
                               ),
                             ),
@@ -113,7 +144,11 @@ void ModelBottomSheet(
                           ),
                         ),
                         onPressed: () {
-                          sendToFire(currentLocation, isHelping, selectedHS);
+                          sendToFire(
+                            currentLocation,
+                            isHelping: isHelping,
+                            selectedFilter: selectedHS,
+                          );
                           //  selectedHS = [];
                           Navigator.of(context).pop();
                           snack('Submitted successfully!', context,

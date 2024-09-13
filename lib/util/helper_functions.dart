@@ -36,13 +36,13 @@ void snack(text, BuildContext context, {Color? color, fontSize, duration}) {
 
 // return icons using name as key
 Map<String, IconData> helpIcons = {
-  'Volunteer': Icons.volunteer_activism,
-  'Donate': Icons.monetization_on,
-  'Provide Shelter': Icons.house,
+  'volunteer': Icons.volunteer_activism,
+  'donate': Icons.monetization_on,
+  'provideShelter': Icons.house,
   'Offer Food': Icons.food_bank,
-  'Medical': Icons.medical_services,
-  'Shelter': Icons.house,
-  'Food': Icons.fastfood,
-  'Clothing': Icons.checkroom,
-  'Other': Icons.help_outline,
+  'medical': Icons.medical_services,
+  'shelter': Icons.house,
+  'food': Icons.fastfood,
+  'clothing': Icons.checkroom,
+  'other': Icons.help_outline,
 };
