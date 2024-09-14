@@ -86,7 +86,7 @@ class _ContactSelectionScreenState extends State<ContactSelectionScreen> {
           ? Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                itemCount: max(contacts.length, 5),
+                itemCount: max(contacts.length, 0),
                 itemBuilder: (context, index) {
                   final contact = contacts[index];
 

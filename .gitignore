@@ -73,3 +73,7 @@ lib/firebase_options.dart
 lib/screens/temp_home.dart
 android/app/src/main/AndroidManifest.xml
 lib/data/hospital_location.json
+
+android/google-services copy.json
+android/app/google-services copy.json
+SharedResources/

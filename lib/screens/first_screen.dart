@@ -7,6 +7,7 @@ import 'package:disaster_ready/screens/main/schemes_screen.dart';
 import 'package:disaster_ready/screens/volunteer/dashboard/volunteer_dashboard.dart';
 import 'package:disaster_ready/screens/volunteer/registering/volunteer_first_screen.dart';
 import 'package:disaster_ready/screens/volunteer/registering/volunteer_intro.dart';
+import 'package:disaster_ready/util/helper_functions.dart';
 // import 'package:disaster_ready/util/helper_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

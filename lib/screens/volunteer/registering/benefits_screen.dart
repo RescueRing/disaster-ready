@@ -36,10 +36,10 @@ class BenefitsScreen extends StatelessWidget {
             icon: Icons.people,
             text: 'Direct communication with disaster response teams',
           ),
-          BenefitItem(
-            icon: Icons.school,
-            text: 'Free training and skill development opportunities',
-          ),
+          // BenefitItem(
+          //   icon: Icons.school,
+          //   text: 'Free training and skill development opportunities',
+          // ),
           SizedBox(height: 40),
         ],
       ),

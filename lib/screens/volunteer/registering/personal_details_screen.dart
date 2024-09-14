@@ -2,11 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:disaster_ready/screens/first_screen.dart';
 import 'package:disaster_ready/services/fetch_address.dart';
 import 'package:disaster_ready/util/helper_functions.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
@@ -138,41 +136,6 @@ class _PersonalDetailsScreenState extends State<PersonalDetailsScreen> {
               }
             ]),
           });
-
-          return;
-          showAboutDialog(
-              context: context,
-              applicationName: 'Registration Successful',
-              applicationVersion: 'Thank you for volunteering!',
-              children: [
-                TextButton(
-                  child: Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ]);
-          // AlertDialog(
-          //   title: Text('Registration Successful'),
-          //   content: Text('Thank you for volunteering!'),
-          //   actions: [
-          //     TextButton(
-          //       child: Text('OK'),
-          //       onPressed: () {
-          //         Navigator.of(context).pop();
-          //       },
-          //     ),
-          //   ],
-          // );
-          // Navigator.of(context).pushReplacement(
-          //   MaterialPageRoute(
-          //     builder: (context) => const Scaffold(
-          //       body: Center(
-          //         child: Text('Registration Successful'),
-          //       ),
-          //     ),
-          //   ),
-          // );
         },
         child: Container(
           margin: const EdgeInsets.all(16),

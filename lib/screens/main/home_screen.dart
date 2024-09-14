@@ -54,9 +54,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Completer<GoogleMapController> controllerCompleter = Completer();
   List<Marker> markersList = [];
   List<MarkerDetails> markers = [];
-
+  String? phone;
   void initPrefs() {
     SharedPreferences.getInstance().then((value) {
+      phone = value.getString('phoneNumber');
       name = value.getString('name') ?? 'Name 1';
       email = value.getString('email') ?? 'email.com';
     });
@@ -94,30 +95,41 @@ class _HomeScreenState extends State<HomeScreen> {
             translationMap[markerDetails.selectedFilter[0]]!,
           ),
           actions: [
-            if (markerDetails.email == email)
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('Close'),
-              ),
-            if (markerDetails.email != email)
-              ElevatedButton(onPressed: () {}, child: Text("Remove Marker")),
-            ElevatedButton.icon(
-              onPressed: () {},
-              label: Text(
-                S.of(context).seekHelp,
-              ),
-              icon: Icon(Icons.call),
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('Close'),
             ),
+            if (markerDetails.phone != phone)
+              ElevatedButton(
+                onPressed: () {},
+                child: Text("Remove Marker"),
+                style: ElevatedButton.styleFrom(
+                  side: BorderSide(
+                      color: Color.fromARGB(255, 0, 164, 205), width: 1),
+                ),
+              ),
+            if (markerDetails.phone == phone)
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  side: BorderSide(
+                      color: Color.fromARGB(255, 0, 164, 205), width: 1),
+                ),
+                onPressed: () {},
+                label: Text(
+                  S.of(context).seekHelp,
+                ),
+                icon: Icon(Icons.call),
+              ),
           ],
           content: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(markerDetails.phone),
-              Text('Latitude: ${markerDetails.latitude}'),
-              Text('Longitude: ${markerDetails.longitude}'),
+              Text('Name: ${markerDetails.name}'),
+              Text('Contact: ${markerDetails.phone}'),
+              Text('${markerDetails.isHelping ? 'Helping' : 'Seeking Help'}'),
             ],
           ),
         );

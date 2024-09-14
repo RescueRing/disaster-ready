@@ -189,9 +189,9 @@ class _DisasterScreenState extends State<DisasterScreen> {
                                 'Call'),
                             icon: Icon(Icons.call)),
                         SizedBox(height: 10),
-                        Text("Does and don'ts here",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 30)),
+                        // Text("Does and don'ts here",
+                        //     style: TextStyle(
+                        //         fontWeight: FontWeight.bold, fontSize: 30)),
                         SizedBox(height: 230),
                       ],
                     ),
