@@ -54,6 +54,7 @@ dependencies:
   text_responsive: ^1.2.1
   location: ^6.0.2
   geocoding: ^3.0.0
+  firebase_messaging: ^15.1.1
 
 dev_dependencies:
   intl_translation: ^0.20.0

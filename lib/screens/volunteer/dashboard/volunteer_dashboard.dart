@@ -1,3 +1,4 @@
+import 'package:disaster_ready/screens/volunteer/dashboard/push_notification_sender.dart';
 import 'package:flutter/material.dart';
 
 class VolunteerDashboard extends StatelessWidget {
@@ -30,6 +31,13 @@ class VolunteerDashboard extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: 40),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => PushNotificationSender()));
+                },
+                child: Text('Report Emergency'),
+              ),
             ],
           ),
         ),
