@@ -105,7 +105,7 @@ Here are previews of the Rescue Ring App's key screens and features:
 | **Help and Resource Sharing** | **Emergency Contacts** | **Government Schemes** |
 |-------------------------------|------------------------|-------------------------|
 | ![Community Need Help](https://github.com/user-attachments/assets/655de880-c783-4461-ab2b-87a3ad0490bd) | ![Contact Added](https://github.com/user-attachments/assets/86642f9e-d5aa-4c4c-b911-d07c1e4559b8) | ![Schemes EN](https://github.com/user-attachments/assets/780ca60a-638e-4bcc-82ba-825184812c34) |
-| ![Community Provide Help](https://github.com/user-attachments/assets/899a76ed-af1d-48d5-bd07-c8b70af13e7c)) | ![Contact Fetch](https://github.com/user-attachments/assets/dea1f71b-23d7-4864-886e-1fd7f9cb228a) | ![Schemes KN](https://github.com/user-attachments/assets/7869f8bd-625e-40ea-8cec-0c4f4a204eb5) |
+| ![Community Provide Help](https://github.com/user-attachments/assets/899a76ed-af1d-48d5-bd07-c8b70af13e7c) | ![Contact Fetch](https://github.com/user-attachments/assets/dea1f71b-23d7-4864-886e-1fd7f9cb228a) | ![Schemes KN](https://github.com/user-attachments/assets/7869f8bd-625e-40ea-8cec-0c4f4a204eb5) |
 | ![Successful Help](https://github.com/user-attachments/assets/12afd51a-0408-4f5b-a3c9-204d22deb88e) | ![](https://github.com/user-attachments/assets/9ddacc0e-10f2-42bf-895c-88e37ac52142) |  |
 
 ---
@@ -113,7 +113,7 @@ Here are previews of the Rescue Ring App's key screens and features:
 | **Volunteer Features** | **Sending Alerts** | **Volunteer Registration Process** |
 |-------------------------|--------------------|------------------------------------|
 | ![Volunteer Intro](https://github.com/user-attachments/assets/d8ed6a2b-945b-42c3-b5c5-d03cb86e8ecb) | ![Send Alert](https://github.com/user-attachments/assets/c358ae30-1bda-4516-9dc3-27af32889f47) | ![Volunteer Benefits](https://github.com/user-attachments/assets/42337342-e504-41e9-acd4-ba9d0795609a) |
-| ![Responsibilities](https://github.com/user-attachments/assets/c20216ae-c3b4-4677-a6bd-ea886b2ed679)) | ![Send Alert Warning](https://github.com/user-attachments/assets/b63eacc8-b5b7-48b3-b8d8-9f3b1f406b3c) | ![Skills Selection](https://github.com/user-attachments/assets/87c0551f-2ac8-4511-aa18-f6013a9a3477) |
+| ![Responsibilities](https://github.com/user-attachments/assets/c20216ae-c3b4-4677-a6bd-ea886b2ed679) | ![Send Alert Warning](https://github.com/user-attachments/assets/b63eacc8-b5b7-48b3-b8d8-9f3b1f406b3c) | ![Skills Selection](https://github.com/user-attachments/assets/87c0551f-2ac8-4511-aa18-f6013a9a3477) |
 | ![T&C](https://github.com/user-attachments/assets/3cccc2e3-3ef7-4f78-9e28-a7a9dad4c6a4) | ![Emergency Alert sent](https://github.com/user-attachments/assets/dfac54d8-b8bc-4d55-9a0c-c5a747ec8ae8) | ![Application Submission](https://github.com/user-attachments/assets/c5680358-bdd4-4d38-ae63-c1aa8ed2e9b8) |
 
 ---
