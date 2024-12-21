@@ -1,7 +1,7 @@
 
-# 🚀 **Contributing to Run Revenue**  
+# 🚀 **Contributing to Disaster ready**  
 
-Thank you for considering contributing to **Run Revenue**! Your contributions are incredibly valuable and help us improve the product. 
+Thank you for considering contributing to **Disaster ready**! Your contributions are incredibly valuable and help us improve the product. 
 
 ---
 
