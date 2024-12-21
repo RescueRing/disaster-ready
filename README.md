@@ -21,7 +21,8 @@ Welcome to **Rescue Ring**, a cutting-edge disaster management platform designed
    - [🌐 Multilingual Support](#-5-multilingual-support)
    - [🤝 Volunteer Program](#-6-volunteer-program)
 3. [💻 Technology Stack](#-technology-stack)
-4. [🔒 License](#-license)
+4. [How to Contribute](#-how-to-contribute)
+5. [🔒 License](#-license)
 
 ---
 
@@ -130,7 +131,14 @@ Here are previews of the Rescue Ring App's key screens and features:
 - **Database**: Firebase Firestore for **real-time data syncing**.  
 - **Push Notifications**: Firebase Messaging for **low-latency alerts**.  
 - **Mapping Services**: Google Maps API for geolocation-based reporting and navigation.  
- 
+
+---
+
+## 💻 How to Contribute
+
+We welcome contributions to the Run Revenue project! If you'd like to contribute, please refer to our [Contributing Guide](CONTRIBUTING.md) for detailed instructions on how to report bugs, request features, and submit code.
+
+Thank you for your interest in contributing!
 
 ---
 ## License <a name="-license"></a>
