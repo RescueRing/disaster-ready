@@ -28,7 +28,7 @@ Welcome to **Rescue Ring**, a cutting-edge disaster management platform designed
 
 ## 🚀 **Introduction**
 
-**Rescue Ring** is a transformative disaster management platform built to assist individuals and communities in **handling natural disasters with precision and efficiency**. By integrating **state-of-the-art technology**, we provide:  
+**Rescue Ring** is a transformative disaster management platform built to assist individuals and communities in **handling natural disasters with precision and efficiency**. We provide:  
 - 🌟 **Real-time disaster updates**  
 - 🚑 **Life-saving SOS functionality**  
 - 🛠️ **Streamlined resource sharing**  
