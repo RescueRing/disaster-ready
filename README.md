@@ -1,62 +1,62 @@
-# 🌍 **Rescue Ring: Revolutionizing Disaster Management** 🚨
+# 🌍 **Rescue Ring: Revolutionizing Disaster Management**
 
 Welcome to **Rescue Ring**, a cutting-edge disaster management platform designed to empower communities during natural calamities. Featuring seamless communication, real-time alerts, and efficient resource coordination, Rescue Ring ensures that **no one is left behind** when disaster strikes. 
 
 ---
 
-## 📥 **Download the App**
+## **Download the App**
 
 [![Download APK](https://camo.githubusercontent.com/2b0b605d77141fd0ff5f5aa8159f6121c4d4bd213d5ee2aba1753d678faaf28c/68747470733a2f2f692e6962622e636f2f71306d6463345a2f6765742d69742d6f6e2d6769746875622e706e67)](https://github.com/RescueRing/resources/raw/refs/heads/main/app/apk_file/app-release.apk)
 
 ---
 
-## 📜 **Table of Contents**
+## **Table of Contents**
 
-1. [🚀 Introduction](#-introduction)
-2. [✨ Key Features](#-key-features)
-   - [🗺️ Real-Time Communication via Google Maps](#-1-real-time-communication-via-google-maps)
-   - [📞 Emergency Contacts & SOS Messaging](#-2-emergency-contacts--sos-messaging)
-   - [📚 Disaster Education](#-3-disaster-education)
-   - [🏛️ Government Schemes Information](#-4-government-schemes-information)
-   - [🌐 Multilingual Support](#-5-multilingual-support)
-   - [🤝 Volunteer Program](#-6-volunteer-program)
-3. [💻 Technology Stack](#-technology-stack)
-4. [How to Contribute](#-how-to-contribute)
-5. [🔒 License](#-license)
+1. [Introduction](#introduction)
+2. [Key Features](#key-features)
+   - [Real-Time Communication via Google Maps](#1-real-time-communication-via-google-maps)
+   - [Emergency Contacts & SOS Messaging](#2-emergency-contacts--sos-messaging)
+   - [Disaster Education](#3-disaster-education)
+   - [Government Schemes Information](#4-government-schemes-information)
+   - [Multilingual Support](#5-multilingual-support)
+   - [Volunteer Program](#6-volunteer-program)
+3. [Technology Stack](#technology-stack)
+4. [How to Contribute](#how-to-contribute)
+5. [License](#-license)
 
 ---
 
-## 🚀 **Introduction**
+## **Introduction**
 
 **Rescue Ring** is a transformative disaster management platform built to assist individuals and communities in **handling natural disasters with precision and efficiency**. We provide:  
-- 🌟 **Real-time disaster updates**  
-- 🚑 **Life-saving SOS functionality**  
-- 🛠️ **Streamlined resource sharing**  
-- 🧑‍🤝‍🧑 **Volunteer-driven disaster validation and aid**
+- **Real-time disaster updates**  
+- **Life-saving SOS functionality**  
+- **Streamlined resource sharing**  
+- **Volunteer-driven disaster validation and aid**
 
 Our mission? To ensure **seamless communication**, **immediate response**, and **long-term recovery** for all affected individuals.
 
 ---
 
-## ✨ **Key Features**
+## **Key Features**
 
-### 🗺️ **1. Real Time Communication via Google Maps** <a name="-1-real-time-communication-via-google-maps"></a>
+### **1. Real Time Communication via Google Maps** 
 - Harnesses the power of **Google Maps API** to enable **location-based disaster reporting**.  
 - Users can:  
-  - 🆘 **Report emergencies** in their vicinity.  
-  - 🍞 **Request or offer resources** (food, medicine, shelter).  
-  - 🔥 **Visualize affected zones** using an intuitive **heatmap**, identifying high-priority areas.  
+  - **Report emergencies** in their vicinity.  
+  - **Request or offer resources** (food, medicine, shelter).  
+  - **Visualize affected zones** using an intuitive **heatmap**, identifying high-priority areas.  
 
 ---
 
-### 📞 **2. Emergency Contacts & SOS Messaging**
+### **2. Emergency Contacts & SOS Messaging**
 - Save critical **emergency contacts** in the app.  
-- 🚨 **One-tap SOS messaging** to notify loved ones and responders with **real-time location details**.  
+- **One-tap SOS messaging** to notify loved ones and responders with **real-time location details**.  
 - Functions even in **low connectivity zones**, leveraging fallback SMS mechanisms.  
 
 ---
 
-### 📚 **3. Disaster Education**
+### **3. Disaster Education**
 - **Quick-access guides** on how to respond to disasters such as:  
   - 🌊 Floods  
   - 🌪️ Cyclones  
@@ -65,7 +65,7 @@ Our mission? To ensure **seamless communication**, **immediate response**, and *
 
 ---
 
-### 🏛️ **4. Government Schemes Information** <a name="-4-government-schemes-information"></a>
+### **4. Government Schemes Information**
 - Comprehensive access to **disaster relief schemes** and their:  
   - Eligibility criteria  
   - Step-by-step application processes
@@ -74,23 +74,23 @@ Our mission? To ensure **seamless communication**, **immediate response**, and *
 
 ---
 
-### 🌐 **5. Multilingual Support**
+### **5. Multilingual Support**
 - Supports multiple languages, ensuring accessibility across India’s diverse linguistic landscape.  
 - 🔄 **Seamless language switching** for personalized user experiences.  
 
 ---
 
-### 🤝 **6. Volunteer Program**
+### **6. Volunteer Program**
 - Equips **volunteers** with exclusive capabilities to:  
-  - 📝 **Validate disaster reports** to avoid misinformation.  
-  - 📢 **Send push notifications** for critical updates.  
-  - 📍 Manage the **heatmap** for efficient resource allocation.  
-  - 🛡️ **Moderate community resources** by removing invalid or outdated information.  
+  - **Validate disaster reports** to avoid misinformation.  
+  - **Send push notifications** for critical updates.  
+  - Manage the **heatmap** for efficient resource allocation.  
+  - **Moderate community resources** by removing invalid or outdated information.  
 - Volunteers undergo a robust **verification process** to ensure platform integrity.  
 
 ---
 
-## 📸 Screenshots and UI Previews
+## Screenshots and UI Previews
 
 Here are previews of the Rescue Ring App's key screens and features:
 
@@ -123,9 +123,9 @@ Here are previews of the Rescue Ring App's key screens and features:
 
 
 
-## 💻 **Technology Stack**
+## **Technology Stack**
 
-### 🖥️ **Mobile App**:
+### **Mobile App**:
 - **Framework**: Flutter (cross-platform development for Android & iOS)  
 - **Programming Language**: Dart  
 - **Database**: Firebase Firestore for **real-time data syncing**.  
@@ -134,7 +134,7 @@ Here are previews of the Rescue Ring App's key screens and features:
 
 ---
 
-## 💻 How to Contribute
+## How to Contribute
 
 We welcome contributions to the Run Revenue project! If you'd like to contribute, please refer to our [Contributing Guide](CONTRIBUTING.md) for detailed instructions on how to report bugs, request features, and submit code.
 
